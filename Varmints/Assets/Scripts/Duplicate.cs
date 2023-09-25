@@ -7,7 +7,7 @@ public class Duplicate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Spawn", 10.0f, 5.0f);
+        InvokeRepeating("Spawn", 5.0f, 30.0f);
     }
 
     // Update is called once per frame

@@ -123,6 +123,23 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &401386446 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8305963969691333191, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
+  m_PrefabInstance: {fileID: 6197257883985947142}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &401386454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 401386446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 298c254654f127944884be0ea1cf47c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &442031149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,20 +1663,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed8032edb4b806340bffcf96cbd9dee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
-  timeBetweenShooting: 0.1
+  damage: 100
+  timeBetweenShooting: 0.5
   spread: 0.04
   range: 100
   reloadTime: 1
   timeBetweenShots: 0
-  magazineSize: 100
-  bulletsPerTap: 1
+  magazineSize: 72
+  bulletsPerTap: 9
   allowButtonHold: 1
   fpsCam: {fileID: 963194227}
   attackPoint: {fileID: 1614125402}
   whatIsEnemy:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   muzzleFlash: {fileID: 6279108870713274002, guid: 310438eed4587fb4f96f6d965f621037, type: 3}
   bulletHoleGraphic: {fileID: 6279108870713274002, guid: 7dfdc08f1754663429199632cea6e5f0, type: 3}
   camShakeMagnitude: 0
@@ -1933,7 +1950,7 @@ PrefabInstance:
       objectReference: {fileID: 480281542}
     - target: {fileID: 7229183952047212182, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5481871
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 7229183952047212182, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1941,7 +1958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7229183952047212182, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.611146
+      value: 30.52
       objectReference: {fileID: 0}
     - target: {fileID: 7229183952047212182, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1978,7 +1995,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8305963969691333191, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 401386454}
   m_SourcePrefab: {fileID: 100100000, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
