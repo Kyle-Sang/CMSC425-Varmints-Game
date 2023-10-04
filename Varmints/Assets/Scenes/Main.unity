@@ -1221,7 +1221,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 9e89646edcbbb40fa99f2b51e2cf44fd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1664,13 +1664,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 100
-  timeBetweenShooting: 0.5
-  spread: 0.04
+  timeBetweenShooting: 0.06
+  spread: 0.03
   range: 100
   reloadTime: 1
   timeBetweenShots: 0
-  magazineSize: 72
-  bulletsPerTap: 9
+  magazineSize: 90
+  bulletsPerTap: 1
   allowButtonHold: 1
   fpsCam: {fileID: 963194227}
   attackPoint: {fileID: 1614125402}
@@ -1708,7 +1708,7 @@ Transform:
   m_GameObject: {fileID: 1601839270}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.58, z: 0}
+  m_LocalPosition: {x: 0, y: 12.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1723,12 +1723,12 @@ Light:
   m_GameObject: {fileID: 1601839270}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 2
+  m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.67058825, b: 0, a: 1}
   m_Intensity: 10
-  m_Range: 10
-  m_SpotAngle: 111.8
+  m_Range: 20
+  m_SpotAngle: 58
   m_InnerSpotAngle: 1
   m_CookieSize: 10
   m_Shadows:
@@ -1948,6 +1948,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 480281542}
+    - target: {fileID: 2150339045004681965, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3c6ca3efec32b4b01bae7bfec17a93df, type: 2}
     - target: {fileID: 7229183952047212182, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.2
