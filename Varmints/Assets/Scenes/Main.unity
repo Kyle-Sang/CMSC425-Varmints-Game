@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &401386446 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8305963969691333191, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
-  m_PrefabInstance: {fileID: 6197257883985947142}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &442031149
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,7 +552,7 @@ GameObject:
   - component: {fileID: 777888742}
   - component: {fileID: 777888743}
   m_Layer: 0
-  m_Name: WaveManager
+  m_Name: WaveSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -590,7 +585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f273675c02ee7da49bd670debe0b86e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 401386446}
+  enemyPrefab: {fileID: 8305963969691333191, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
   enemies: []
   spawnLocation: {x: 0, y: 0, z: 0}
   enemiesToSpawn: 0

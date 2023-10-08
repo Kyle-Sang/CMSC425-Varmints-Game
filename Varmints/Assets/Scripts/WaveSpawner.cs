@@ -21,7 +21,8 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemies.Count <= 0)
+        Debug.Log("Enemies Count " + enemies.Count);
+        if (enemies.Count <= 0) 
         {
             // advance to next wave
             SpawnWave();
@@ -37,13 +38,9 @@ public class WaveSpawner : MonoBehaviour
         // Assume enemies is empty 
         for (int i = 0; i < enemiesToSpawn; i++)
         {
-            enemies.Add((GameObject) Instantiate(enemyPrefab, spawnLocation, Quaternion.identity));
+            GameObject newEnemy = Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
+            newEnemy.GetComponent<Chase>().target = GameObject.Find("Player").transform;
+            enemies.Add(newEnemy); 
         }
-        
-    }
-
-    void OnEnemyDeath()
-    {
-        // need to remove from enemies ArrayList
     }
 }
