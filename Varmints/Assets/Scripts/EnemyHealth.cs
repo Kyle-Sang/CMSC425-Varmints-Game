@@ -10,7 +10,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        GameObject player = GameObject.FindWithTag("Player");
+        GameObject player = GameObject.FindWithTag("CurrencyManager");
         if (player != null)
         {
             playerCurrency = player.GetComponent<PlayerCurrency>();
