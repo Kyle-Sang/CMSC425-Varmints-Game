@@ -6,16 +6,25 @@ public class WaveSpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public List<GameObject> enemies; // references to enemy Game Objects in current wave
-    public Vector3 spawnLocation;
-    public int enemiesToSpawn;
-
+    public int enemiesToSpawn = 10;
+    private List<Vector3> spawnLocations;
+    public float spawnRadius;
+    public int numSpawnLocations;
   
     // Start is called before the first frame update
     void Start()
     {
         enemies = new List<GameObject>();
-        enemiesToSpawn = 10; // TODO: Make zero later
-        spawnLocation = Vector3.zero;
+
+        Vector3 baseSpawn = new Vector3(spawnRadius, 0, 0);
+        spawnLocations = new List<Vector3>(numSpawnLocations);
+        for(int i = 0; i < numSpawnLocations; i++)
+        {
+            // set 10 spawn locations at 36 degrees angled around the center
+            var rotation = (360 / numSpawnLocations) * i;
+            Vector3 position = Quaternion.Euler(0, rotation, 0) * baseSpawn;
+            spawnLocations.Add(position);
+        }
     }
 
     // Update is called once per frame
@@ -38,7 +47,9 @@ public class WaveSpawner : MonoBehaviour
         // Assume enemies is empty 
         for (int i = 0; i < enemiesToSpawn; i++)
         {
-            GameObject newEnemy = Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
+            int spawnIndex = i % numSpawnLocations;
+            Debug.Log("Adding Enemy at location " + spawnIndex);
+            GameObject newEnemy = Instantiate(enemyPrefab, spawnLocations[spawnIndex], Quaternion.identity);
             newEnemy.GetComponent<Chase>().target = GameObject.Find("Player").transform;
             enemies.Add(newEnemy); 
         }
