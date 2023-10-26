@@ -10,10 +10,12 @@ public class WaveSpawner : MonoBehaviour
     private List<Vector3> spawnLocations;
     public float spawnRadius;
     public int numSpawnLocations;
+    public int secondDelay;
+    private bool isSpawning;
   
     // Start is called before the first frame update
     void Start()
-    {
+    { 
         enemies = new List<GameObject>();
 
         Vector3 baseSpawn = new Vector3(spawnRadius, 0, 0);
@@ -25,16 +27,18 @@ public class WaveSpawner : MonoBehaviour
             Vector3 position = Quaternion.Euler(0, rotation, 0) * baseSpawn;
             spawnLocations.Add(position);
         }
+        isSpawning = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         Debug.Log("Enemies Count " + enemies.Count);
-        if (enemies.Count <= 0) 
+        if (enemies.Count <= 0 && !isSpawning) 
         {
             // advance to next wave
-            SpawnWave();
+            StartCoroutine(SpawnWave());
+            isSpawning = true;
         }
         else
         {
@@ -42,9 +46,11 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
-    void SpawnWave()
+    IEnumerator SpawnWave()
     {
         // Assume enemies is empty 
+        yield return new WaitForSeconds(secondDelay);
+
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             int spawnIndex = i % numSpawnLocations;
@@ -53,5 +59,7 @@ public class WaveSpawner : MonoBehaviour
             newEnemy.GetComponent<Chase>().target = GameObject.Find("Player").transform;
             enemies.Add(newEnemy); 
         }
+        
+        isSpawning = false;
     }
 }
