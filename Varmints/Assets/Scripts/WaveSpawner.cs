@@ -14,14 +14,13 @@ public class WaveSpawner : MonoBehaviour
     void Start()
     {
         enemies = new List<GameObject>();
-        enemiesToSpawn = 10; // TODO: Make zero later
         spawnLocation = Vector3.zero;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Enemies Count " + enemies.Count);
+        // Debug.Log("Enemies Count " + enemies.Count);
         if (enemies.Count <= 0) 
         {
             // advance to next wave
