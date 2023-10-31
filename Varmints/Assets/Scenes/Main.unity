@@ -1896,6 +1896,8 @@ MonoBehaviour:
   wall: {fileID: 5340310016597939120, guid: f397747c10ecb6a4d8727c33d98011c2, type: 3}
   range: 100
   fpsCam: {fileID: 963194227}
+  playerCurrency: {fileID: 1446282865}
+  cost: 100
 --- !u!82 &1525026076
 AudioSource:
   m_ObjectHideFlags: 0
