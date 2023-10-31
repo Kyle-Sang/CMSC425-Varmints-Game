@@ -7,11 +7,16 @@ public class WaveSpawner : MonoBehaviour
     public GameObject enemyPrefab;
     public List<GameObject> enemies; // references to enemy Game Objects in current wave
     public int enemiesToSpawn = 10;
-    private List<Vector3> spawnLocations;
     public float spawnRadius;
     public int numSpawnLocations;
     public int secondDelay;
+    public float roundTime; // should we terminate around after t
+    public float buyTime;
+
+    private List<Vector3> spawnLocations;
     private bool isSpawning;
+    private float timeLeft; // time left in current phase
+
   
     // Start is called before the first frame update
     void Start()
@@ -34,23 +39,43 @@ public class WaveSpawner : MonoBehaviour
     void Update()
     {
         Debug.Log("Enemies Count " + enemies.Count);
-        if (enemies.Count <= 0 && !isSpawning) 
+        if (enemies.Count <= 0) 
         {
-            // advance to next wave
-            StartCoroutine(SpawnWave());
-            isSpawning = true;
-        }
+            StartCoroutine(StartBuyPhase());
+        } 
         else
         {
-            // wave is still happening
+            StartCoroutine(RoundPhase());
         }
+        
     }
 
-    IEnumerator SpawnWave()
+    IEnumerator RoundPhase()
     {
-        // Assume enemies is empty 
-        yield return new WaitForSeconds(secondDelay);
+        yield return null;
+    }
 
+    IEnumerator StartBuyPhase()
+    {
+
+        while (timeLeft > 0)
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                SpawnWave();
+                yield return null;
+            }
+            timeLeft -= Time.deltaTime;
+        }
+
+        SpawnWave();
+        yield return null;
+    }
+
+
+
+    void SpawnWave()
+    {
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             int spawnIndex = i % numSpawnLocations;
@@ -59,7 +84,8 @@ public class WaveSpawner : MonoBehaviour
             newEnemy.GetComponent<Chase>().target = GameObject.Find("Player").transform;
             enemies.Add(newEnemy); 
         }
-        
+                
+        timeLeft = roundTime;
         isSpawning = false;
     }
 }
