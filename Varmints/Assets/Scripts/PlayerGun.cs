@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using System.IO;
 
 public class PlayerGun : MonoBehaviour
 {
@@ -26,10 +27,16 @@ public class PlayerGun : MonoBehaviour
     public float camShakeMagnitude, camShakeDuration;
     public TextMeshProUGUI text;
 
+    private AudioSource objAudio;
+    public GunAudio gunAudio;
+ 
+
     private void Awake()
     {
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        objAudio = GetComponent<AudioSource>();
+        if (objAudio == null) Debug.Log("NO AUDIO FOUND");
     }
     private void Update()
     {
@@ -37,6 +44,7 @@ public class PlayerGun : MonoBehaviour
 
         //SetText
         text.SetText(bulletsLeft + " / " + magazineSize);
+
     }
     private void MyInput()
     {
@@ -48,6 +56,7 @@ public class PlayerGun : MonoBehaviour
         //Shoot
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0){
             bulletsShot = bulletsPerTap;
+            gunAudio.playAudio(objAudio);
             Shoot();
         }
     }
@@ -66,7 +75,6 @@ public class PlayerGun : MonoBehaviour
         //RayCast
         if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range))
         {
-            Debug.Log(rayHit.collider.name);
             Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
 
             if (rayHit.collider.TryGetComponent(out IDamageable damageable)) {

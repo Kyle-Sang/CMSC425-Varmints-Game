@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class SpawnPillar : MonoBehaviour
@@ -8,10 +9,12 @@ public class SpawnPillar : MonoBehaviour
     public float range;
     public Camera fpsCam;
     public RaycastHit rayHit;
+    public PlayerCurrency playerCurrency;
+    public int cost;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -24,7 +27,10 @@ public class SpawnPillar : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E)) 
         {
-            Spawn();
+            if (playerCurrency.count >= cost) {
+                Spawn();
+                playerCurrency.count -= cost;
+            }
         }
     }
     private void Spawn()

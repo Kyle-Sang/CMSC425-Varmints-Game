@@ -39,7 +39,7 @@ public class WaveSpawner : MonoBehaviour
         {
             GameObject newEnemy = Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
             newEnemy.GetComponent<Chase>().target = GameObject.Find("Player").transform;
-            enemies.Add(newEnemy); 
+            enemies.Add(newEnemy);
         }
     }
 }
