@@ -121,4 +121,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 6049374447110669921, guid: 4aabffbe171f7f544975804a1dda8088, type: 3}
-  radius: 10
+  radius: 100
+  maxWalls: 2
