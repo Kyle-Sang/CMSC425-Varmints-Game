@@ -8,7 +8,12 @@ public class PlayerCurrency : MonoBehaviour
     public int count;
     public TextMeshProUGUI text;
 
-    private void Update() {
+    void Start() {
+        text.SetText(count.ToString());
+    }
+
+    public void changeMoney(int change) {
+        count += change;
         text.SetText(count.ToString());
     }
 }
