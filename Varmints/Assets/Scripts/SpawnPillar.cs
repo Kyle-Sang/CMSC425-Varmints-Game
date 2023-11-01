@@ -29,7 +29,7 @@ public class SpawnPillar : MonoBehaviour
         {
             if (playerCurrency.count >= cost) {
                 Spawn();
-                playerCurrency.count -= cost;
+                playerCurrency.changeMoney(-cost);
             }
         }
     }

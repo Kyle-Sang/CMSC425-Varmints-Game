@@ -29,7 +29,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             Death();
             if (playerCurrency != null)
             {
-                playerCurrency.count += value;  // access count field on PlayerCurrency component
+                playerCurrency.changeMoney(value);  // access count field on PlayerCurrency component
             }
             else
             {
