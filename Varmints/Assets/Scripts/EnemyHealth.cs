@@ -40,7 +40,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void Death()
     {
-        Debug.Log("Death Called");
         if (GameObject.Find("WaveSpawner") != null)
         {
             GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>().enemies.Remove(gameObject);

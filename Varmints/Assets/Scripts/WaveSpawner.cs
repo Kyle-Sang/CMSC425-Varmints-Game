@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
@@ -11,6 +12,7 @@ public class WaveSpawner : MonoBehaviour
     public float outerRadius;
     public float roundTime; // should we terminate around after t
     public float buyTime;
+    public TextMeshProUGUI text;
 
     private float timeLeft; // time left in current phase
 
@@ -19,48 +21,36 @@ public class WaveSpawner : MonoBehaviour
     void Start()
     { 
         StartCoroutine(StartBuyPhase());
+        text.SetText(timeLeft.ToString());
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Enemies Count " + enemies.Count);
+        timeLeft -= Time.deltaTime;
+        text.SetText(timeLeft.ToString());
     }
 
     IEnumerator StartRoundPhase()
     {
-        while (timeLeft > 0) {
-            if(enemies.Count <= 0) 
-            {
-                timeLeft = buyTime;
-                yield return StartCoroutine(StartBuyPhase());
-            }
-
-            timeLeft -= Time.deltaTime;
-        }
-
-        yield return null;
+        Debug.Log("Round Starting");
+        timeLeft = roundTime;
+        yield return new WaitWhile(() => timeLeft > 0 && enemies.Count > 0);
+        StartCoroutine(StartBuyPhase());
     }
 
     IEnumerator StartBuyPhase()
     {
-
-        while (timeLeft > 0)
-        {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                SpawnWave();
-                yield return StartCoroutine(StartRoundPhase());
-            }
-            timeLeft -= Time.deltaTime;
-        }
-
+        Debug.Log("Buy Phase Starting");
+        timeLeft = buyTime;
+        yield return new WaitWhile(() => timeLeft > 0 && !Input.GetKey(KeyCode.C));
         SpawnWave();
-        yield return null;
+        StartCoroutine(StartRoundPhase());
     }
 
     void SpawnWave()
     {
+        Debug.Log("Wave Spawning");
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             System.Random rand = new System.Random();
