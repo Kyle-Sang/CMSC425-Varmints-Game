@@ -13,8 +13,6 @@ public class WaveSpawner : MonoBehaviour
     public float roundTime; // should we terminate around after t
     public float buyTime;
 
-    private List<Vector3> spawnLocations;
-    private bool isSpawning;
     private float timeLeft; // time left in current phase
 
   
@@ -22,36 +20,28 @@ public class WaveSpawner : MonoBehaviour
     void Start()
     { 
         enemies = new List<GameObject>();
-
         Vector3 baseSpawn = new Vector3(spawnRadius, 0, 0);
-        spawnLocations = new List<Vector3>(numSpawnLocations);
-        for(int i = 0; i < numSpawnLocations; i++)
-        {
-            // set 10 spawn locations at 36 degrees angled around the center
-            var rotation = (360 / numSpawnLocations) * i;
-            Vector3 position = Quaternion.Euler(0, rotation, 0) * baseSpawn;
-            spawnLocations.Add(position);
-        }
-        isSpawning = false;
+        StartCoroutine(StartBuyPhase());
     }
 
     // Update is called once per frame
     void Update()
     {
         Debug.Log("Enemies Count " + enemies.Count);
-        if (enemies.Count <= 0) 
-        {
-            StartCoroutine(StartBuyPhase());
-        } 
-        else
-        {
-            StartCoroutine(RoundPhase());
-        }
-        
     }
 
-    IEnumerator RoundPhase()
+    IEnumerator StartRoundPhase()
     {
+        while (timeLeft > 0) {
+            if(enemies.Count <= 0) 
+            {
+                timeLeft = buyTime;
+                yield return StartCoroutine(StartBuyPhase());
+            }
+
+            timeLeft -= Time.timeDelta;
+        }
+
         yield return null;
     }
 
@@ -63,7 +53,7 @@ public class WaveSpawner : MonoBehaviour
             if (Input.GetKey(KeyCode.Space))
             {
                 SpawnWave();
-                yield return null;
+                yield return StartCoroutine(StartRoundPhase());
             }
             timeLeft -= Time.deltaTime;
         }
@@ -72,20 +62,22 @@ public class WaveSpawner : MonoBehaviour
         yield return null;
     }
 
-
-
     void SpawnWave()
     {
         for (int i = 0; i < enemiesToSpawn; i++)
         {
-            int spawnIndex = i % numSpawnLocations;
-            Debug.Log("Adding Enemy at location " + spawnIndex);
-            GameObject newEnemy = Instantiate(enemyPrefab, spawnLocations[spawnIndex], Quaternion.identity);
+            Random rand = new System.Random();
+            double radius = rand.nextDouble() * (outerRadius - innerRadius) + innerRadius;
+            double rotation = rand.Next(0, 360) // represents degrees
+
+            Vector3 spawn = new Vector3(radius, 0, 0);
+            spawn *= new Quaternion(0, rotation, 0)
+
+            GameObject newEnemy = Instantiate(enemyPrefab, spawn, Quaternion.identity);
             newEnemy.GetComponent<Chase>().target = GameObject.Find("Player").transform;
             enemies.Add(newEnemy); 
         }
                 
         timeLeft = roundTime;
-        isSpawning = false;
     }
 }
