@@ -722,8 +722,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8305963969691333191, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
   enemies: []
-  spawnLocation: {x: 0, y: 0, z: 0}
-  enemiesToSpawn: 0
+  enemiesToSpawn: 25
+  innerRadius: 250
+  outerRadius: 300
+  roundTime: 6000
+  buyTime: 10
 --- !u!1 &936653426
 GameObject:
   m_ObjectHideFlags: 0
