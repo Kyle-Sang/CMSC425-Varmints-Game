@@ -18,15 +18,14 @@ public class Enemy_Audio : ScriptableObject
     {
         int num, time;
 
-        //num = rand.Next(audioSources.Length);
+
         time = rand.Next(5, 15);
 
         while (true) {
             yield return new WaitForSeconds(time);
             num = rand.Next(audioSources.Length);
             source.PlayOneShot(audioSources[num], volume);
-            //Debug.Log(num);
-            //yield return new WaitForSeconds(time);
+
         }
     }
 }

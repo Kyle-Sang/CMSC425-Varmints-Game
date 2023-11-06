@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a4d005f9662d72459bbf64f4d37931f, type: 3}
+  m_Name: Enemy_Audio
+  m_EditorClassIdentifier: 
+  volume: 1
+  audioSources:
+  - {fileID: 8300000, guid: e66801f24ee77cb45bcfa25107630acf, type: 3}
+  - {fileID: 8300000, guid: 5c6880fbab8d476498ed2fa51a963687, type: 3}
+  - {fileID: 8300000, guid: f749aff20be41e14d853d97998e5d14c, type: 3}
+  - {fileID: 8300000, guid: 3b2461e8aa508b542a5929fb77145cfe, type: 3}
+  - {fileID: 8300000, guid: 8824d92e2424169438e20717a6a4e5a0, type: 3}
+  - {fileID: 8300000, guid: 3e8759a45bf8b0541a893eb57edbfa38, type: 3}
+  - {fileID: 8300000, guid: 9363c94e85cafc343af5b7cd317df09f, type: 3}
+  - {fileID: 8300000, guid: 705056acd08d64b4bb5ee5bf8857a5c2, type: 3}
+  - {fileID: 8300000, guid: ff8038146be845748a91ce4bda288b7a, type: 3}
+  - {fileID: 8300000, guid: fb4291ced71e4e945af09bb659f955ac, type: 3}

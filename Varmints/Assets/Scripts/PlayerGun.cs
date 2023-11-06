@@ -59,6 +59,10 @@ public class PlayerGun : MonoBehaviour
             gunAudio.playAudio(objAudio);
             Shoot();
         }
+        if (readyToShoot && shooting && !reloading && bulletsLeft == 0)
+        {
+            gunAudio.emptyMag(objAudio);
+        }
     }
     private void Shoot()
     {
