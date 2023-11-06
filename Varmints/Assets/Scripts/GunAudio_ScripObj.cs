@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Audio Config", menuName = "GunShot Audio")]
+[CreateAssetMenu(fileName = "Audio Config", menuName = "Audio/GunShot Audio")]
 public class GunAudio : ScriptableObject
 {
 
