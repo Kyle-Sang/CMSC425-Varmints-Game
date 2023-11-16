@@ -29,7 +29,7 @@ public class TargetClosest : MonoBehaviour
             {
                 Vector3 targetDir = target.transform.position - transform.position;
                 // Rotating in 2D Plane...
-                targetDir.y = Mathf.Clamp();
+           
                 targetDir = targetDir.normalized;
 
                 Vector3 currentDir = transform.forward;

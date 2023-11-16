@@ -10,22 +10,26 @@ public class TurretGun : MonoBehaviour
     private RaycastHit rayHit;
     public int damage;
     public float range, timeBetweenShots;
+
+    public GameObject muzzleFlash, bulletHoleGraphic;
     // Start is called before the first frame update
     void Start()
     {
         layerMask = 1 << layerNumber;
+        InvokeRepeating("Shoot", timeBetweenShots, timeBetweenShots);
     }
 
     // Update is called once per frame
     void Update()
     {
-        InvokeRepeating("Shoot", timeBetweenShots, timeBetweenShots);
+        
     }
 
     private void Shoot()
     {
+        Debug.Log("Turret Shoot Called");
         //RayCast
-        if (Physics.Raycast(transform.position, transform.forward, out rayHit, range, layerMask))
+        if (Physics.Raycast(transform.position, transform.forward, out rayHit, range))
         {
             //Debug.Log(rayHit.collider.name);
             //Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
@@ -36,6 +40,11 @@ public class TurretGun : MonoBehaviour
                 float force = 1.0f;
                 damageable.Damage(damage, ((rayHit.collider.transform.position - transform.position) * force));
             }
+
+            //Graphics
+            Transform barrel = transform.Find("Barrel");
+            GameObject flash = Instantiate(muzzleFlash, barrel.position, Quaternion.Euler(barrel.transform.eulerAngles));
+            flash.transform.parent = this.transform;
         }
     }
 }
