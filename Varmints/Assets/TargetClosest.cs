@@ -20,11 +20,16 @@ public class TargetClosest : MonoBehaviour
         if (enemies.Count > 0)
         {
             Transform target = FindClosest();
+            var temp = transform.parent;
+            transform.parent = null;
+            transform.LookAt(target);
+            transform.parent = temp;
 
             if (target != null)
             {
                 Vector3 targetDir = target.transform.position - transform.position;
                 // Rotating in 2D Plane...
+                targetDir.y = Mathf.Clamp();
                 targetDir = targetDir.normalized;
 
                 Vector3 currentDir = transform.forward;
