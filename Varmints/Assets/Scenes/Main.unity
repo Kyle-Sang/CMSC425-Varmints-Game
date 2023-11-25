@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 254809336}
   - component: {fileID: 254809339}
   - component: {fileID: 254809338}
-  - component: {fileID: 254809337}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -157,27 +156,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 593132994}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &254809337
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 254809335}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &254809338
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -823,6 +801,8 @@ MonoBehaviour:
   damage: 100
   range: 100
   timeBetweenShots: 1
+  muzzleFlash: {fileID: 6279108870713274002, guid: 310438eed4587fb4f96f6d965f621037, type: 3}
+  bulletHoleGraphic: {fileID: 0}
 --- !u!1 &686304600
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,9 +1077,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8305963969691333191, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
   enemies: []
-  enemiesToSpawn: 25
-  innerRadius: 100
-  outerRadius: 120
+  enemiesToSpawn: 2
+  innerRadius: 20
+  outerRadius: 30
   roundTime: 6000
   buyTime: 10
   text: {fileID: 327185788}
@@ -2510,7 +2490,7 @@ PrefabInstance:
       objectReference: {fileID: 480281542}
     - target: {fileID: 1094661896384666521, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
       propertyPath: moveSpeed
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2150339045004681965, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
       propertyPath: m_Materials.Array.data[0]

@@ -6,7 +6,7 @@ using UnityEngine;
 public class TargetClosest : MonoBehaviour
 {
     private List<GameObject> enemies;
-    private float turnRateRadians = 2 * Mathf.PI;
+    private float turnRateRadians = 2 * Mathf.PI; 
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,6 @@ public class TargetClosest : MonoBehaviour
             {
                 Vector3 targetDir = target.transform.position - transform.position;
                 // Rotating in 2D Plane...
-           
                 targetDir = targetDir.normalized;
 
                 Vector3 currentDir = transform.forward;

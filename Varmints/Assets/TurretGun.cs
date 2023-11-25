@@ -27,13 +27,15 @@ public class TurretGun : MonoBehaviour
 
     private void Shoot()
     {
-        Debug.Log("Turret Shoot Called");
         //RayCast
         if (Physics.Raycast(transform.position, transform.forward, out rayHit, range))
         {
+            Vector3 forward = transform.TransformDirection(Vector3.forward) * 100;
+            Debug.DrawRay(transform.position, forward, Color.red);
             //Debug.Log(rayHit.collider.name);
             //Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
 
+            Debug.Log("Rayhit Collider: " + rayHit.collider);
             if (rayHit.collider.TryGetComponent(out IDamageable damageable))
             {
                 // temporary force
