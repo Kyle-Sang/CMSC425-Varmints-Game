@@ -35,7 +35,6 @@ public class TurretGun : MonoBehaviour
             //Debug.Log(rayHit.collider.name);
             //Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
 
-            Debug.Log("Rayhit Collider: " + rayHit.collider);
             if (rayHit.collider.TryGetComponent(out IDamageable damageable))
             {
                 // temporary force
