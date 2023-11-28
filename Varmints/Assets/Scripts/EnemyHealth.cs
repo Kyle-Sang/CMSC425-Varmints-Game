@@ -29,7 +29,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             Death();
             if (playerCurrency != null)
             {
-                playerCurrency.count += value;  // access count field on PlayerCurrency component
+                playerCurrency.changeMoney(value);  // access count field on PlayerCurrency component
             }
             else
             {
@@ -40,7 +40,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void Death()
     {
-        Debug.Log("Enemy Died");
         if (GameObject.Find("WaveSpawner") != null)
         {
             GameObject.Find("WaveSpawner").GetComponent<WaveSpawner>().enemies.Remove(gameObject);

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
 
     public float groundDrag;
+    public float airDrag;
 
     public float jumpForce;
     public float jumpCooldown;
@@ -91,6 +92,12 @@ public class PlayerController : MonoBehaviour
         // in air
         else if(!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            if (horizontalInput == 0 && verticalInput == 0) {
+                var vel = rb.velocity;
+                vel.x *= 1.0f- (airDrag * Time.deltaTime);
+                vel.z *= 1.0f- (airDrag * Time.deltaTime);
+                GetComponent<Rigidbody>().velocity = vel;
+            }
     }
 
     private void SpeedControl()
