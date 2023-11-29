@@ -10,7 +10,7 @@ public class PlayerGun : MonoBehaviour
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
-    int bulletsLeft, bulletsShot;
+    public int bulletsLeft, bulletsShot;
 
     //bools 
     bool shooting, readyToShoot, reloading;
@@ -28,7 +28,8 @@ public class PlayerGun : MonoBehaviour
     public TextMeshProUGUI text;
 
     private AudioSource objAudio;
-    public GunAudio gunAudio;
+    public GunType type;
+    private AudioManager manager;
  
 
     private void Awake()
@@ -37,6 +38,7 @@ public class PlayerGun : MonoBehaviour
         readyToShoot = true;
         objAudio = GetComponent<AudioSource>();
         if (objAudio == null) Debug.Log("NO AUDIO FOUND");
+        manager = FindObjectOfType<AudioManager>();
     }
     private void Update()
     {
@@ -51,17 +53,18 @@ public class PlayerGun : MonoBehaviour
         if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
         else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload();
-
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload(); 
         //Shoot
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0){
+
+        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        {
             bulletsShot = bulletsPerTap;
-            gunAudio.playAudio(objAudio);
+            manager.fire(type, this);
             Shoot();
         }
-        if (readyToShoot && shooting && !reloading && bulletsLeft == 0)
+        if (readyToShoot && shooting && !reloading && bulletsLeft <= 0)
         {
-            gunAudio.emptyMag(objAudio);
+            manager.fire(GunType.None, this);
         }
     }
     private void Shoot()
@@ -109,6 +112,7 @@ public class PlayerGun : MonoBehaviour
     }
     private void Reload()
     {
+        manager.reload(type);
         reloading = true;
         Invoke("ReloadFinished", reloadTime);
     }

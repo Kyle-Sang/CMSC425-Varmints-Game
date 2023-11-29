@@ -8,13 +8,14 @@ public class Chase : MonoBehaviour
     public float moveSpeed;
     Vector3 moveDirection;
     Rigidbody rb;
-    public Enemy_Audio enmAudio;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        StartCoroutine(enmAudio.PlayAudio(rb.GetComponent<AudioSource>()));
+
     }
 
     // Update is called once per frame

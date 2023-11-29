@@ -9,7 +9,7 @@ public class Enemy_Audio : ScriptableObject
 {
 
     public float volume = 1f;
-    public AudioClip[] audioSources = new AudioClip[10];
+    public AudioClip[] audioSources;
     private System.Random rand = new System.Random();
 
     // Will "Randomly" choose a noise from the list
@@ -28,4 +28,5 @@ public class Enemy_Audio : ScriptableObject
 
         }
     }
+
 }

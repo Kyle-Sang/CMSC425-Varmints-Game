@@ -153,7 +153,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   moveSpeed: 1
-  enmAudio: {fileID: 11400000, guid: d13c7204bfe21124090780f4580b075c, type: 2}
 --- !u!114 &7608582135059730493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +168,7 @@ MonoBehaviour:
   health: 100
   value: 30
   playerCurrency: {fileID: 0}
+  enmAudio: {fileID: 11400000, guid: d13c7204bfe21124090780f4580b075c, type: 2}
 --- !u!135 &-7221361768324638291
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -281,7 +281,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.703
       inSlope: 0
       outSlope: 0
       tangentMode: 0
