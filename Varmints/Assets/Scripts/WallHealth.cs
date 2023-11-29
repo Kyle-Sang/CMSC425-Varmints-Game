@@ -20,4 +20,8 @@ public class WallHealth : MonoBehaviour, IDamageable
     public void Death() {
         gameObject.SetActive(false);
     }
+
+    public void Revive() {
+        gameObject.SetActive(true);
+    }
 }
