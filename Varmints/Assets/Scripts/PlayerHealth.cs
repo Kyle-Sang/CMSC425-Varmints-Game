@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using TMPro;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
@@ -14,8 +13,6 @@ public class PlayerHealth : MonoBehaviour, IDamageable
     public void Damage(int damage, Vector3 force)
     {
         health -= damage;
-        text.SetText(health.ToString());
-        text.SetText(health.ToString());
         if (health <= 0)
         {
             Cursor.lockState = CursorLockMode.None;
