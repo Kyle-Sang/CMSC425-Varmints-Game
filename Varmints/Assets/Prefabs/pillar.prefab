@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1105255209611014092}
   - component: {fileID: 6547372135087808693}
   - component: {fileID: 1386850317779662484}
+  - component: {fileID: 1542822508757262290}
   m_Layer: 2
   m_Name: pillar
   m_TagString: Pillar
@@ -123,3 +124,16 @@ MonoBehaviour:
   wallPrefab: {fileID: 6049374447110669921, guid: 4aabffbe171f7f544975804a1dda8088, type: 3}
   radius: 10
   maxWalls: 2
+--- !u!114 &1542822508757262290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5340310016597939120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eda4c958008ea1e469ac3087591b2969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1000

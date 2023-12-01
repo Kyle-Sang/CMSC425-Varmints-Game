@@ -16,11 +16,7 @@ public class TurretHealth : MonoBehaviour, IDamageable
     }
     public void Death()
     {
-        gameObject.SetActive(false);
-    }
-
-    public void Revive()
-    {
-        gameObject.SetActive(true);
+        Debug.Log("something broke!");
+        Destroy(gameObject);
     }
 }
