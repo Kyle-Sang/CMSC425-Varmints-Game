@@ -5,23 +5,28 @@ using UnityEngine;
 public class WallHealth : MonoBehaviour, IDamageable
 {
     public int health = 100;
+    public float cooldown = 5.0f;
+    public MeshRenderer mesh;
+    public BoxCollider box;
 
-    void Start() {
-
-    }
     public void Damage(int damage, Vector3 force)
     {
         health -= damage;
         if (health <= 0)
         {
-            Death();
+            StartCoroutine(Death());
         }
     }
-    public void Death() {
-        gameObject.SetActive(false);
+    IEnumerator Death() {
+        mesh.enabled = false;
+        box.enabled = false;
+        yield return new WaitForSecondsRealtime(cooldown);
+        Revive();
     }
 
     public void Revive() {
-        gameObject.SetActive(true);
+        mesh.enabled = true;
+        box.enabled = true;
+        health = 100;
     }
 }

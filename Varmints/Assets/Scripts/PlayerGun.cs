@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using System.IO;
@@ -37,6 +38,9 @@ public class PlayerGun : MonoBehaviour
     private GunType type;
     private Boolean toggle;
     private float timeBetweenShoot;
+    public TrailRenderer bulletTrail;
+ 
+
     private void Awake()
     {
         readyToShoot = true;
@@ -92,7 +96,10 @@ public class PlayerGun : MonoBehaviour
         //RayCast
         if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range))
         {
-            Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
+            // Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
+
+            TrailRenderer trail = Instantiate(bulletTrail, attackPoint.position, Quaternion.identity);
+            StartCoroutine(SpawnTrail(trail, rayHit));
 
             if (rayHit.collider.TryGetComponent(out IDamageable damageable)) {
                 // temporary force
@@ -179,4 +186,17 @@ public class PlayerGun : MonoBehaviour
         }
     }
 
+    
+    private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit) {
+        float time = 0;
+        Vector3 start = trail.transform.position;
+
+        while (time < 1) {
+            trail.transform.position = Vector3.Lerp(start, hit.point, time);
+            time += Time.deltaTime / trail.time;
+            yield return null;
+        }
+        trail.transform.position = hit.point;
+        Destroy(trail.gameObject, trail.time);
+    }
 }
