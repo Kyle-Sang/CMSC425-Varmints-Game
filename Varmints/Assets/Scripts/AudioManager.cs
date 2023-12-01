@@ -28,11 +28,11 @@ public class AudioManager : MonoBehaviour
         source.PlayOneShot(enemyDeath[i], volume);
     }
 
-    public void fire(GunType type, PlayerGun gunData)
+    public void fire(GunType type, float betweenShots)
     {
         if (type == GunType.None)
         {
-            if (Time.time > lastShootTime + 0.2f)//gunData.bulletsPerTap)
+            if (Time.time > lastShootTime + betweenShots)
             {
                 lastShootTime = Time.time;
                 source.PlayOneShot(dryFire, volume);

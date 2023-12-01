@@ -161,10 +161,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a382d5fc49afed442b5f2a9e073ae22d, type: 3}
   gunSound:
   - type: 0
-    Fire: {fileID: 8300000, guid: 5a28c441fc6ee1d40bd04f927953f646, type: 3}
+    Fire: {fileID: 8300000, guid: ed0ed49908791ee4dbb1fc55eb2a7868, type: 3}
     Reload: {fileID: 8300000, guid: 71ee5310578ecdb42aca29339c980882, type: 3}
   - type: 1
     Fire: {fileID: 8300000, guid: def11714722a69c48887583d34766e6f, type: 3}
+    Reload: {fileID: 8300000, guid: a79ea0d195c3bce45b772489d0e76efd, type: 3}
+  - type: 3
+    Fire: {fileID: 8300000, guid: ed0ed49908791ee4dbb1fc55eb2a7868, type: 3}
+    Reload: {fileID: 8300000, guid: 71ee5310578ecdb42aca29339c980882, type: 3}
+  - type: 4
+    Fire: {fileID: 8300000, guid: 75b10c905ad468049bc4dff3c6476ebe, type: 3}
     Reload: {fileID: 8300000, guid: a79ea0d195c3bce45b772489d0e76efd, type: 3}
   dryFire: {fileID: 8300000, guid: 8921752bf22c11046bfb0d4376c3cb2e, type: 3}
 --- !u!4 &80475250
@@ -1057,7 +1063,7 @@ MonoBehaviour:
   outerRadius: 30
   roundTime: 6000
   buyTime: 10
-  text: {fileID: 327185788}
+  text: {fileID: 0}
 --- !u!1 &936653426
 GameObject:
   m_ObjectHideFlags: 0
@@ -2254,7 +2260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 100
-  timeBetweenShooting: 1
+  timeBetweenShooting: 0.5
   spread: 0.03
   range: 100
   reloadTime: 1
@@ -2274,7 +2280,31 @@ MonoBehaviour:
   camShakeMagnitude: 0
   camShakeDuration: 0
   text: {fileID: 686304602}
-  type: 1
+  guns:
+  - type: 0
+    damage: 10
+    timeBetweenShooting: 0.5
+    spread: 0.001
+    range: 100
+    reloadTime: 1
+    timeBetweenShots: 1
+    magazineSize: 6
+    bulletsPerTap: 1
+    allowButtonHold: 1
+    bulletsLeft: 6
+    bulletsShot: 0
+  - type: 1
+    damage: 60
+    timeBetweenShooting: 1
+    spread: 0.03
+    range: 70
+    reloadTime: 1
+    timeBetweenShots: 1
+    magazineSize: 10
+    bulletsPerTap: 1
+    allowButtonHold: 0
+    bulletsLeft: 10
+    bulletsShot: 0
 --- !u!114 &1525026075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2796,3 +2826,5 @@ SceneRoots:
   - {fileID: 777888742}
   - {fileID: 1446282866}
   - {fileID: 1154686404}
+  - {fileID: 3048720497101751337}
+  - {fileID: 6197257883985947142}
