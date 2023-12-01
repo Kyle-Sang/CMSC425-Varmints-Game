@@ -1,20 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
     public List<GameObject> enemies; // references to enemy Game Objects in current wave
+    public List<GameObject> enemyTypes; // List of prefabs that can be spawned
+
     public int enemiesToSpawn = 10;
-    public float innerRadius;
-    public float outerRadius;
-    public float roundTime; // should we terminate around after t
+    public int maxRounds = 10;
+    public float innerRadius = 20;
+    public float outerRadius = 30;
+    public float roundTime; // should we terminate a round after t
     public float buyTime;
     public TextMeshProUGUI text;
 
     private float timeLeft; // time left in current phase
+    private int roundNumber = 1;
+    private int roundValue = 100;
 
   
     // Start is called before the first frame update
@@ -36,7 +42,11 @@ public class WaveSpawner : MonoBehaviour
         Debug.Log("Round Starting");
         timeLeft = roundTime;
         yield return new WaitWhile(() => timeLeft > 0 && enemies.Count > 0);
-        StartCoroutine(StartBuyPhase());
+
+        if (roundNumber < maxRounds)
+        {
+            StartCoroutine(StartBuyPhase());
+        }
     }
 
     IEnumerator StartBuyPhase()
@@ -51,9 +61,19 @@ public class WaveSpawner : MonoBehaviour
     void SpawnWave()
     {
         Debug.Log("Wave Spawning");
-        for (int i = 0; i < enemiesToSpawn; i++)
-        {
-            System.Random rand = new System.Random();
+        int totalCost = roundNumber * roundValue;
+        System.Random rand = new System.Random();
+        while (totalCost > 0) {
+            int enemy = rand.Next(0, enemyTypes.Count-1);
+            int enemyCost = enemyTypes[enemy].GetComponent<EnemyHealth>().cost;
+
+            while (enemy > 0 && enemyCost > totalCost) {
+                enemy -= 1;
+                enemyCost = enemyTypes[enemy].GetComponent<EnemyHealth>().cost;
+            }
+            totalCost -= enemyCost;
+
+            // choose spawn Location
             float radius = (float) rand.NextDouble() * (outerRadius - innerRadius) + innerRadius;
             float rotation = rand.Next(0, 360); // represents degrees
 
@@ -61,12 +81,17 @@ public class WaveSpawner : MonoBehaviour
             Quaternion q_rotation = Quaternion.Euler(0, rotation, 0);
 
             spawn = q_rotation * spawn;
-
-            GameObject newEnemy = Instantiate(enemyPrefab, spawn, Quaternion.identity);
-            newEnemy.GetComponent<Chase>().target = GameObject.Find("Player").transform;
-            enemies.Add(newEnemy);
+            SpawnEnemy(enemy, spawn);
         }
                 
         timeLeft = roundTime;
+        roundNumber += 1;
+    }
+
+    void SpawnEnemy(int index, Vector3 spawn)
+    {
+        GameObject newEnemy = Instantiate(enemyTypes[index], spawn, Quaternion.identity);
+        newEnemy.GetComponent<Chase>().target = GameObject.Find("Player").transform;
+        enemies.Add(newEnemy);
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 {
     public int health = 100;
     public int value = 30;
+    public int cost = 10;
     public PlayerCurrency playerCurrency;
     public Enemy_Audio enmAudio;
     Rigidbody rb;
