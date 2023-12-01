@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class GunData
@@ -11,4 +12,5 @@ public class GunData
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
     public int bulletsLeft, bulletsShot;
+    public bool toggle = false;
 }

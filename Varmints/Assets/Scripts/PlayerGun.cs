@@ -35,8 +35,8 @@ public class PlayerGun : MonoBehaviour
 
     public GunData[] guns;
     private GunData curr;
-    private GunType type;
-    private Boolean toggle;
+    public GunType type;
+    //private Boolean toggle;
     private float timeBetweenShoot;
     public TrailRenderer bulletTrail;
  
@@ -50,7 +50,6 @@ public class PlayerGun : MonoBehaviour
         curr = guns[0];
         type = guns[0].type;
         curr.bulletsLeft = curr.magazineSize;
-        toggle = false;
         timeBetweenShoot = curr.timeBetweenShooting; 
 
     }
@@ -143,19 +142,19 @@ public class PlayerGun : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            GunData pistol = Array.Find(guns, x => x.type == GunType.Pistol);
-            type = GunType.Pistol;
+            //GunData pistol = Array.Find(guns, x => x.type == GunType.Pistol);
             curr = guns[0];
+            type = curr.toggle ? GunType.AutomaticP : GunType.Pistol;
 
         } else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            GunData shotgun = Array.Find(guns, x => x.type == GunType.Shotgun);
-            type = GunType.Shotgun;
+            //GunData shotgun = Array.Find(guns, x => x.type == GunType.Shotgun);
             curr = guns[1];
+            type = curr.toggle ? GunType.AutomaticSh : GunType.Shotgun;
 
         } else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            switch (toggle)
+            switch (curr.toggle)
             {
                 case true:
                     curr.timeBetweenShooting = timeBetweenShoot;
@@ -182,7 +181,7 @@ public class PlayerGun : MonoBehaviour
                     }
                     break;
             }
-            toggle = !toggle;
+            curr.toggle = !curr.toggle;
         }
     }
 
