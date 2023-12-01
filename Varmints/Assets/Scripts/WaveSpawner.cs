@@ -7,6 +7,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.EditorTools;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -20,16 +21,22 @@ public class WaveSpawner : MonoBehaviour
     public float roundTime; // should we terminate a round after t
     public float buyTime;
     public TextMeshProUGUI text;
+    public TextMeshProUGUI wave;
+    
 
     private float timeLeft; // time left in current phase
-    private int roundNumber = 1;
-    private int roundValue = 10;
+    private int roundNumber = 0;
+    public int roundValue = 5;
 
-  
+    private System.Random rand;
+
+
+
     // Start is called before the first frame update
     void Start()
     { 
         StartCoroutine(StartBuyPhase());
+        rand = new System.Random();
         text.SetText(timeLeft.ToString());
     }
 
@@ -68,35 +75,38 @@ public class WaveSpawner : MonoBehaviour
 
     void SpawnWave()
     {
+        roundNumber += 1;
+        wave.SetText(roundNumber.ToString());
         Debug.Log("Wave Spawning");
         int totalCost = roundNumber * roundValue;
-        System.Random rand = new System.Random();
 
-        // Loop while we have not reached the total cost of a round
-        while (totalCost > 0) {
+        for (int i = 0; i < totalCost / 2; i++)
+        {
+            // Make half of the enemies small
+            SpawnEnemy(0, GetSpawn());
+        }
+
+        totalCost /= 2;
+        // Loop for the remaining half spawn randomly
+        while (totalCost > 0)
+        {
 
             // generate an index into the enemyTypes array
-            int enemy = rand.Next(0, enemyTypes.Count);
-            int enemyCost = enemyTypes[enemy].GetComponent<EnemyHealth>().cost;
+            int enemyIndex = rand.Next(0, enemyTypes.Count);
+            int enemyCost = enemyTypes[enemyIndex].GetComponent<EnemyHealth>().cost;
 
             // If the cost of the generated enemy is too steep, go to the next largest enemy and check cost
-            while (enemy > 0 && enemyCost > totalCost) {
-                enemy -= 1;
-                enemyCost = enemyTypes[enemy].GetComponent<EnemyHealth>().cost;
+            while (enemyIndex > 0 && enemyCost > totalCost)
+            {
+                enemyIndex -= 1;
+                enemyCost = enemyTypes[enemyIndex].GetComponent<EnemyHealth>().cost;
             }
             totalCost -= enemyCost;
             // Note: at the end of this loop totalCost should always equal zero since the cost of the basic 
             // enemy is 1
 
-            // choose spawn Location
-            float radius = (float) rand.NextDouble() * (outerRadius - innerRadius) + innerRadius;
-            float rotation = rand.Next(0, 360); // represents degrees
 
-            Vector3 spawn = new Vector3(radius, 0, 0);
-            Quaternion q_rotation = Quaternion.Euler(0, rotation, 0);
-
-            spawn = q_rotation * spawn;
-            SpawnEnemy(enemy, spawn);
+            SpawnEnemy(enemyIndex, GetSpawn());
         }
 
         var checkCost = 0;
@@ -107,7 +117,6 @@ public class WaveSpawner : MonoBehaviour
         Debug.Log("Wave Cost: " + checkCost);
 
         timeLeft = roundTime;
-        roundNumber += 1;
     }
 
     void SpawnEnemy(int index, Vector3 spawn)
@@ -115,5 +124,19 @@ public class WaveSpawner : MonoBehaviour
         GameObject newEnemy = Instantiate(enemyTypes[index], spawn, Quaternion.identity);
         newEnemy.GetComponent<Chase>().target = GameObject.Find("Player").transform;
         enemies.Add(newEnemy);
+    }
+
+    private Vector3 GetSpawn()
+    {
+        // choose spawn Location
+        float radius = (float)rand.NextDouble() * (outerRadius - innerRadius) + innerRadius;
+        float rotation = rand.Next(0, 360); // represents degrees
+
+        Vector3 spawn = new Vector3(radius, 0, 0);
+        Quaternion q_rotation = Quaternion.Euler(0, rotation, 0);
+
+        spawn = q_rotation * spawn;
+
+        return spawn;
     }
 }

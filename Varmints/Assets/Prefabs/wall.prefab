@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  cooldown: 20
+  cooldown: 5
+  regenRate: 5
   mesh: {fileID: 5110858551876230826}
   box: {fileID: 7398162226199238472}

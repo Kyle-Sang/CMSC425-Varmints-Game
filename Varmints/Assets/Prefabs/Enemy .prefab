@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  moveSpeed: 1
+  moveSpeed: 1.2
 --- !u!114 &7608582135059730493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  value: 30
+  value: 20
   cost: 1
   playerCurrency: {fileID: 0}
   enmAudio: {fileID: 11400000, guid: d13c7204bfe21124090780f4580b075c, type: 2}

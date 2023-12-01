@@ -165,9 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308487de201cca240a0c7549edc4a1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
-  value: 60
-  cost: 2
+  health: 400
+  value: 100
+  cost: 5
   playerCurrency: {fileID: 0}
   enmAudio: {fileID: 11400000, guid: d13c7204bfe21124090780f4580b075c, type: 2}
 --- !u!135 &1143449966410364456
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSpeed: 1
-  damage: 1
+  damage: 5
 --- !u!82 &6273295272356838385
 AudioSource:
   m_ObjectHideFlags: 0
