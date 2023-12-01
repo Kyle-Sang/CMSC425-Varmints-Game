@@ -10,6 +10,8 @@ public class TurretGun : MonoBehaviour
     private RaycastHit rayHit;
     public int damage;
     public float range, timeBetweenShots;
+    public Transform attackPoint;
+    public TrailRenderer bulletTrail;
 
     public GameObject muzzleFlash, bulletHoleGraphic;
     // Start is called before the first frame update
@@ -30,22 +32,41 @@ public class TurretGun : MonoBehaviour
         //RayCast
         if (Physics.Raycast(transform.position, transform.forward, out rayHit, range))
         {
-            Vector3 forward = transform.TransformDirection(Vector3.forward) * 100;
-            Debug.DrawRay(transform.position, forward, Color.red);
-            //Debug.Log(rayHit.collider.name);
-            //Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
+            if (rayHit.collider.tag == "Enemy") {
+                Vector3 forward = transform.TransformDirection(Vector3.forward) * 100;
+                Debug.DrawRay(transform.position, forward, Color.red);
 
-            if (rayHit.collider.TryGetComponent(out IDamageable damageable))
-            {
-                // temporary force
-                float force = 1.0f;
-                damageable.Damage(damage, ((rayHit.collider.transform.position - transform.position) * force));
+                TrailRenderer trail = Instantiate(bulletTrail, attackPoint.position, Quaternion.identity);
+                StartCoroutine(SpawnTrail(trail, rayHit));
+
+                //Debug.Log(rayHit.collider.name);
+                //Instantiate(bulletHoleGraphic, rayHit.point, Quaternion.Euler(0, 180, 0));
+
+                if (rayHit.collider.TryGetComponent(out IDamageable damageable))
+                {
+                    // temporary force
+                    float force = 1.0f;
+                    damageable.Damage(damage, ((rayHit.collider.transform.position - transform.position) * force));
+                }
+
+                //Graphics
+                Transform barrel = transform.Find("Barrel");
+                GameObject flash = Instantiate(muzzleFlash, attackPoint.position, Quaternion.Euler(barrel.transform.eulerAngles));
+                flash.transform.parent = this.transform;
             }
-
-            //Graphics
-            Transform barrel = transform.Find("Barrel");
-            GameObject flash = Instantiate(muzzleFlash, barrel.position, Quaternion.Euler(barrel.transform.eulerAngles));
-            flash.transform.parent = this.transform;
         }
+    }
+
+    private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit) {
+        float time = 0;
+        Vector3 start = trail.transform.position;
+
+        while (time < 1) {
+            trail.transform.position = Vector3.Lerp(start, hit.point, time);
+            time += Time.deltaTime / trail.time;
+            yield return null;
+        }
+        trail.transform.position = hit.point;
+        Destroy(trail.gameObject, trail.time);
     }
 }

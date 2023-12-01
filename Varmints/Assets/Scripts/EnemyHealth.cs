@@ -33,7 +33,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
     public void Damage(int damage, Vector3 force)
     {
-        health -= damage;
+        if (gameObject.tag == "Enemy") {
+            health -= damage;
+        }
+        
         if (health <= 0)
         {
             manager.onDeath();
