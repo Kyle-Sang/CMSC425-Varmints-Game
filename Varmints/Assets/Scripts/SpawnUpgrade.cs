@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class SpawnPillar : MonoBehaviour
+public class SpawnUpgrade : MonoBehaviour
 {
     public GameObject wall;
     public float range;
@@ -11,6 +11,8 @@ public class SpawnPillar : MonoBehaviour
     public RaycastHit rayHit;
     public PlayerCurrency playerCurrency;
     public int cost;
+
+    public KeyCode key;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +27,7 @@ public class SpawnPillar : MonoBehaviour
 
     private void MyInput()
     {
-        if (Input.GetKeyDown(KeyCode.E)) 
+        if (Input.GetKeyDown(key)) 
         {
             if (playerCurrency.count >= cost) {
                 Spawn();
