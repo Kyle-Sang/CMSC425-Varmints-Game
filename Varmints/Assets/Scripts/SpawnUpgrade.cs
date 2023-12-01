@@ -31,7 +31,6 @@ public class SpawnUpgrade : MonoBehaviour
         {
             if (playerCurrency.count >= cost) {
                 Spawn();
-                playerCurrency.changeMoney(-cost);
             }
         }
     }
@@ -41,7 +40,10 @@ public class SpawnUpgrade : MonoBehaviour
 
         if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range))
         {
-            Instantiate(wall, rayHit.point, Quaternion.Euler(0, 180, 0));
+            if (rayHit.transform.CompareTag("Ground")) {
+                Instantiate(wall, rayHit.point, Quaternion.Euler(0, 180, 0));
+                playerCurrency.changeMoney(-cost);
+            }  
         }
 
     }
