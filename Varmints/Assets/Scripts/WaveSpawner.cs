@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
@@ -43,10 +46,15 @@ public class WaveSpawner : MonoBehaviour
         timeLeft = roundTime;
         yield return new WaitWhile(() => timeLeft > 0 && enemies.Count > 0);
 
-        if (roundNumber < maxRounds)
-        {
+        // Uncomment for if we want it to be limited in rounds
+        //if (roundNumber <= maxRounds)
+        //{
             StartCoroutine(StartBuyPhase());
-        }
+        //}
+        //else
+        //{
+        //    // End Screen Logic
+        //}
     }
 
     IEnumerator StartBuyPhase()
@@ -64,7 +72,7 @@ public class WaveSpawner : MonoBehaviour
         int totalCost = roundNumber * roundValue;
         System.Random rand = new System.Random();
         while (totalCost > 0) {
-            int enemy = rand.Next(0, enemyTypes.Count-1);
+            int enemy = rand.Next(0, enemyTypes.Count);
             int enemyCost = enemyTypes[enemy].GetComponent<EnemyHealth>().cost;
 
             while (enemy > 0 && enemyCost > totalCost) {
@@ -83,7 +91,14 @@ public class WaveSpawner : MonoBehaviour
             spawn = q_rotation * spawn;
             SpawnEnemy(enemy, spawn);
         }
-                
+
+        var checkCost = 0;
+        foreach (GameObject enemy in enemies)
+        {
+            checkCost += enemy.GetComponent<EnemyHealth>().cost;
+        }
+        Debug.Log("Wave Cost: " + checkCost);
+
         timeLeft = roundTime;
         roundNumber += 1;
     }

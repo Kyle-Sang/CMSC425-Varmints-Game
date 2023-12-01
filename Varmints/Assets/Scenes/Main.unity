@@ -1249,7 +1249,7 @@ MonoBehaviour:
   - {fileID: 4463562231052782417, guid: 562a57e5d0334fe4983c45705eb1b2b9, type: 3}
   - {fileID: 6204649638501254713, guid: 9409aa8f6593c9747bef9dcc4a395d68, type: 3}
   enemiesToSpawn: 5
-  maxRounds: 10
+  maxRounds: 2
   innerRadius: 20
   outerRadius: 30
   roundTime: 6000
@@ -2891,13 +2891,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1301078957656386679, guid: db908899f68c8404fb10aa76ed606a5a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1613866374}
-    - targetCorrespondingSourceObject: {fileID: 1301078957656386679, guid: db908899f68c8404fb10aa76ed606a5a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1613866373}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db908899f68c8404fb10aa76ed606a5a, type: 3}
 --- !u!1001 &6197257883985947142
 PrefabInstance:
