@@ -23,7 +23,7 @@ public class WaveSpawner : MonoBehaviour
 
     private float timeLeft; // time left in current phase
     private int roundNumber = 1;
-    private int roundValue = 100;
+    private int roundValue = 10;
 
   
     // Start is called before the first frame update
@@ -71,15 +71,22 @@ public class WaveSpawner : MonoBehaviour
         Debug.Log("Wave Spawning");
         int totalCost = roundNumber * roundValue;
         System.Random rand = new System.Random();
+
+        // Loop while we have not reached the total cost of a round
         while (totalCost > 0) {
+
+            // generate an index into the enemyTypes array
             int enemy = rand.Next(0, enemyTypes.Count);
             int enemyCost = enemyTypes[enemy].GetComponent<EnemyHealth>().cost;
 
+            // If the cost of the generated enemy is too steep, go to the next largest enemy and check cost
             while (enemy > 0 && enemyCost > totalCost) {
                 enemy -= 1;
                 enemyCost = enemyTypes[enemy].GetComponent<EnemyHealth>().cost;
             }
             totalCost -= enemyCost;
+            // Note: at the end of this loop totalCost should always equal zero since the cost of the basic 
+            // enemy is 1
 
             // choose spawn Location
             float radius = (float) rand.NextDouble() * (outerRadius - innerRadius) + innerRadius;

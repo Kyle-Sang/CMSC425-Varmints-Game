@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   value: 30
+  cost: 1
   playerCurrency: {fileID: 0}
   enmAudio: {fileID: 11400000, guid: d13c7204bfe21124090780f4580b075c, type: 2}
 --- !u!135 &-7221361768324638291
