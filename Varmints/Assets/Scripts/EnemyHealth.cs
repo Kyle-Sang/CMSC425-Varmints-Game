@@ -7,6 +7,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public int health = 100;
     public int value = 30;
     public PlayerCurrency playerCurrency;
+    public Enemy_Audio enmAudio;
+    Rigidbody rb;
+    AudioSource source;
+    AudioManager manager;
 
     private void Start()
     {
@@ -19,6 +23,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         {
             Debug.LogError("Player object not found");
         }
+        rb = GetComponent<Rigidbody>();
+        source = rb.GetComponent<AudioSource>();
+        StartCoroutine(enmAudio.PlayAudio(source));
+        manager = FindObjectOfType<AudioManager>();
     }
 
     public void Damage(int damage, Vector3 force)
@@ -26,6 +34,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         health -= damage;
         if (health <= 0)
         {
+            manager.onDeath();
             Death();
             if (playerCurrency != null)
             {
