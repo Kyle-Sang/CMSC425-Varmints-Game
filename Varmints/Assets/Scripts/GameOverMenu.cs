@@ -10,12 +10,12 @@ public class GameOverMenu : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene("Main");
-        Time.timeScale = 0f;
-
+        Time.timeScale = 1f;
+        PauseMenu.GameIsPaused = false;
+        PlayerHealth.dead = false;
     }
     public void QuitGame()
     {
         SceneManager.LoadScene("MainMenu");
-
     }
 }
