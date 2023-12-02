@@ -159,6 +159,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8e1a36a23da765f4aa89a5d6bfb741e0, type: 3}
   - {fileID: 8300000, guid: ed1819d389fc46e4cb565599c5fc3c47, type: 3}
   - {fileID: 8300000, guid: a382d5fc49afed442b5f2a9e073ae22d, type: 3}
+  playerHit:
+  - {fileID: 8300000, guid: 8a6935af2fdf7fd45940702470ac271f, type: 3}
+  - {fileID: 8300000, guid: bb63fc924b031ac4e8de6f357e8e7b21, type: 3}
+  - {fileID: 8300000, guid: ad57e48ab7bed19418a1cd3421fa00d7, type: 3}
+  - {fileID: 8300000, guid: 4cd73b45264a5bf4aa11a043b8ce181c, type: 3}
+  wallHit:
+  - {fileID: 8300000, guid: 3ba66aa76562ba24a9ec0aafd410e794, type: 3}
+  - {fileID: 8300000, guid: d54eed0d16c50834ba54874b0c1d505d, type: 3}
+  - {fileID: 8300000, guid: bc85adc8333914b45be0c4a24dce8d58, type: 3}
+  pillarSpawn:
+  - {fileID: 8300000, guid: ff4fe1f2c442a17489a3120b9b56cc19, type: 3}
+  - {fileID: 8300000, guid: f69263364615464448aa124acd503aaa, type: 3}
   gunSound:
   - type: 0
     Fire: {fileID: 8300000, guid: ed0ed49908791ee4dbb1fc55eb2a7868, type: 3}
@@ -172,7 +184,12 @@ MonoBehaviour:
   - type: 4
     Fire: {fileID: 8300000, guid: 75b10c905ad468049bc4dff3c6476ebe, type: 3}
     Reload: {fileID: 8300000, guid: a79ea0d195c3bce45b772489d0e76efd, type: 3}
+  - type: 5
+    Fire: {fileID: 8300000, guid: 413076a97aaef214287b9744cc58aee0, type: 3}
+    Reload: {fileID: 8300000, guid: 75eb5e101094a5f4da8d3efccf70b258, type: 3}
   dryFire: {fileID: 8300000, guid: 8921752bf22c11046bfb0d4376c3cb2e, type: 3}
+  torchSpawn: {fileID: 8300000, guid: d2baf65626275534fb2426bd13cf83d4, type: 3}
+  turretSpawn: {fileID: 8300000, guid: 286c316dc66ff744290c0cd0563d38a4, type: 3}
 --- !u!4 &80475250
 Transform:
   m_ObjectHideFlags: 0

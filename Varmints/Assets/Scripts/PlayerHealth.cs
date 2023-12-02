@@ -7,12 +7,16 @@ public class PlayerHealth : MonoBehaviour, IDamageable
 {
     public int health = 100;
     public TextMeshProUGUI text;
+
+    private AudioManager manager;
     void Start() {
         text.SetText(health.ToString());
+        manager = FindObjectOfType<AudioManager>();
     }
     public void Damage(int damage, Vector3 force)
     {
         health -= damage;
+        manager.onHit();
         text.SetText(health.ToString());
         if (health <= 0)
         {

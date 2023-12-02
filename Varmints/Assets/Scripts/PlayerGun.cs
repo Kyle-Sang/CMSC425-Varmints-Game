@@ -5,6 +5,7 @@ using TMPro;
 using System.IO;
 using System;
 using UnityEngine.UI;
+using System.Data.SqlTypes;
 
 public class PlayerGun : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class PlayerGun : MonoBehaviour
     //private Boolean toggle;
     private float timeBetweenShoot;
     public TrailRenderer bulletTrail;
- 
+
 
     private void Awake()
     {
@@ -149,9 +150,10 @@ public class PlayerGun : MonoBehaviour
         } else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             //GunData shotgun = Array.Find(guns, x => x.type == GunType.Shotgun);
+            
             curr = guns[1];
             type = curr.toggle ? GunType.AutomaticSh : GunType.Shotgun;
-
+            
         } else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             switch (curr.toggle)
