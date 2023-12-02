@@ -2405,6 +2405,7 @@ MonoBehaviour:
   fpsCam: {fileID: 963194227}
   playerCurrency: {fileID: 1446282865}
   cost: 100
+  increment: 0
   key: 122
 --- !u!82 &1525026076
 AudioSource:
@@ -2519,6 +2520,7 @@ MonoBehaviour:
   fpsCam: {fileID: 963194227}
   playerCurrency: {fileID: 1446282865}
   cost: 200
+  increment: 10
   key: 99
 --- !u!114 &1525026078
 MonoBehaviour:
@@ -2537,6 +2539,7 @@ MonoBehaviour:
   fpsCam: {fileID: 963194227}
   playerCurrency: {fileID: 1446282865}
   cost: 100
+  increment: 0
   key: 120
 --- !u!114 &1525026079
 MonoBehaviour:
