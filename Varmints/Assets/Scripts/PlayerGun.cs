@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using System.IO;
+using System;
+using UnityEngine.UI;
+using System.Data.SqlTypes;
 
 public class PlayerGun : MonoBehaviour
 {
@@ -29,44 +32,53 @@ public class PlayerGun : MonoBehaviour
     public TextMeshProUGUI text;
 
     private AudioSource objAudio;
-    public GunType type;
     private AudioManager manager;
+
+    public GunData[] guns;
+    private GunData curr;
+    public GunType type;
+    //private Boolean toggle;
+    private float timeBetweenShoot;
     public TrailRenderer bulletTrail;
- 
+
 
     private void Awake()
     {
-        bulletsLeft = magazineSize;
         readyToShoot = true;
         objAudio = GetComponent<AudioSource>();
         if (objAudio == null) Debug.Log("NO AUDIO FOUND");
         manager = FindObjectOfType<AudioManager>();
+        curr = guns[0];
+        type = guns[0].type;
+        curr.bulletsLeft = curr.magazineSize;
+        timeBetweenShoot = curr.timeBetweenShooting; 
+
     }
     private void Update()
     {
         MyInput();
-
+        changeWeapon();
         //SetText
-        text.SetText(bulletsLeft + " / " + magazineSize);
+        text.SetText(curr.bulletsLeft + " / " + curr.magazineSize);
 
     }
     private void MyInput()
     {
-        if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
+        if (curr.allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
         else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload(); 
+        if (Input.GetKeyDown(KeyCode.R) && curr.bulletsLeft < curr.magazineSize && !reloading) Reload(); 
         //Shoot
 
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        if (readyToShoot && shooting && !reloading && curr.bulletsLeft > 0)
         {
-            bulletsShot = bulletsPerTap;
-            manager.fire(type, this);
+            curr.bulletsShot = curr.bulletsPerTap;
+            manager.fire(type, curr.timeBetweenShooting);
             Shoot();
         }
-        if (readyToShoot && shooting && !reloading && bulletsLeft <= 0)
+        if (readyToShoot && shooting && !reloading && curr.bulletsLeft <= 0)
         {
-            manager.fire(GunType.None, this);
+            manager.fire(GunType.None, curr.timeBetweenShooting);
         }
     }
     private void Shoot()
@@ -74,9 +86,9 @@ public class PlayerGun : MonoBehaviour
         readyToShoot = false;
 
         //Spread
-        float x = Random.Range(-spread, spread);
-        float y = Random.Range(-spread, spread);
-        float z = Random.Range(-spread, spread);
+        float x = UnityEngine.Random.Range(-curr.spread, curr.spread);
+        float y = UnityEngine.Random.Range(-curr.spread, curr.spread);
+        float z = UnityEngine.Random.Range(-curr.spread, curr.spread);
 
         //Calculate Direction with Spread
         Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, z);
@@ -92,7 +104,7 @@ public class PlayerGun : MonoBehaviour
             if (rayHit.collider.TryGetComponent(out IDamageable damageable)) {
                 // temporary force
                 float force = 1.0f;
-                damageable.Damage(damage, ((rayHit.collider.transform.position - transform.position) * force));
+                damageable.Damage(curr.damage, ((rayHit.collider.transform.position - transform.position) * force));
             }
         }
 
@@ -103,13 +115,13 @@ public class PlayerGun : MonoBehaviour
         GameObject flash = Instantiate(muzzleFlash, attackPoint.position, Quaternion.Euler(attackPoint.transform.eulerAngles));
         flash.transform.parent = this.transform;
         
-        bulletsLeft--;
-        bulletsShot--;
+        curr.bulletsLeft--;
+        curr.bulletsShot--;
+        
+        Invoke("ResetShot", curr.timeBetweenShooting);
 
-        Invoke("ResetShot", timeBetweenShooting);
-
-        if(bulletsShot > 0 && bulletsLeft > 0)
-        Invoke("Shoot", timeBetweenShots);
+        if(curr.bulletsShot > 0 && curr.bulletsLeft > 0)
+        Invoke("Shoot", curr.timeBetweenShots);
     }
     private void ResetShot()
     {
@@ -119,13 +131,43 @@ public class PlayerGun : MonoBehaviour
     {
         manager.reload(type);
         reloading = true;
-        Invoke("ReloadFinished", reloadTime);
+        StartCoroutine(ReloadFinished(curr));
     }
-    private void ReloadFinished()
+    private IEnumerator ReloadFinished(GunData reloadGun)
     {
-        bulletsLeft = magazineSize;
+        yield return new WaitForSeconds(reloadGun.reloadTime);
+        reloadGun.bulletsLeft = reloadGun.magazineSize;
         reloading = false;
     }
+
+    private void changeWeapon()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            //GunData pistol = Array.Find(guns, x => x.type == GunType.Pistol);
+            Reload();
+            reloading = false;
+            curr = guns[0];
+            type = curr.type;
+
+        } else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            //GunData shotgun = Array.Find(guns, x => x.type == GunType.Shotgun);
+            Reload();
+            reloading = false;
+            curr = guns[1];
+            type = curr.type;
+            
+        } else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            Reload();
+            reloading = false;
+            curr = guns[2];
+            type = curr.type;
+
+        }
+    }
+
     
     private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit) {
         float time = 0;

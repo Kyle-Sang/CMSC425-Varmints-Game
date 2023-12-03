@@ -8,14 +8,20 @@ public class AudioManager : MonoBehaviour
     public float volume = 1f;
     
     public AudioClip[] enemyDeath;
+    public AudioClip[] playerHit;
+    public AudioClip[] wallHit;
+    public AudioClip[] pillarSpawn;
+    public AudioClip[] flarePop;
     public Sound[] gunSound;
     public AudioClip dryFire;
-
+    public AudioClip torchSpawn;
+    public AudioClip turretSpawn;
 
     private AudioSource source;
     private System.Random rand = new System.Random();
 
     private float lastShootTime;
+    private float lastHitTime;
 
     private void Start()
     {
@@ -28,11 +34,27 @@ public class AudioManager : MonoBehaviour
         source.PlayOneShot(enemyDeath[i], volume);
     }
 
-    public void fire(GunType type, PlayerGun gunData)
+    public void onHit()
+    {
+        if (Time.time > lastHitTime + 0.3f)
+        {
+            lastHitTime = Time.time;
+            int i = rand.Next(playerHit.Length);
+            source.PlayOneShot(playerHit[i], volume);
+        }
+    }
+
+    public void popFlare()
+    {
+        int i = rand.Next(flarePop.Length);
+        source.PlayOneShot(flarePop[i], volume);
+    }
+
+    public void fire(GunType type, float betweenShots)
     {
         if (type == GunType.None)
         {
-            if (Time.time > lastShootTime + 0.2f)//gunData.bulletsPerTap)
+            if (Time.time > lastShootTime + betweenShots)
             {
                 lastShootTime = Time.time;
                 source.PlayOneShot(dryFire, volume);
@@ -52,6 +74,23 @@ public class AudioManager : MonoBehaviour
         {
             Sound reload = Array.Find(gunSound, y => y.type == type);
             source.PlayOneShot(reload.Reload, volume);
+        }
+    }
+
+    public void spawn(string type)
+    {
+        switch (type)
+        {
+            case "Turret":
+                source.PlayOneShot(turretSpawn, volume);
+                break;
+            case "pillar":
+                int i = rand.Next(pillarSpawn.Length);
+                source.PlayOneShot(pillarSpawn[i], volume);
+                break;
+            case "torch":
+                source.PlayOneShot(torchSpawn, volume);
+                break;
         }
     }
 
