@@ -7,7 +7,6 @@ public enum GunType
     Pistol,
     Shotgun,
     None, 
-    AutomaticP,
-    AutomaticSh,
+    Automatic,
     Turret
 }

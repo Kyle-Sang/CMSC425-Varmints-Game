@@ -145,45 +145,21 @@ public class PlayerGun : MonoBehaviour
         {
             //GunData pistol = Array.Find(guns, x => x.type == GunType.Pistol);
             curr = guns[0];
-            type = curr.toggle ? GunType.AutomaticP : GunType.Pistol;
+            type = curr.type;
 
         } else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             //GunData shotgun = Array.Find(guns, x => x.type == GunType.Shotgun);
             
             curr = guns[1];
-            type = curr.toggle ? GunType.AutomaticSh : GunType.Shotgun;
+            type = curr.type;
             
         } else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            switch (curr.toggle)
-            {
-                case true:
-                    curr.timeBetweenShooting = timeBetweenShoot;
-                    switch (type)
-                    {
-                        case GunType.AutomaticP:
-                            type = GunType.Pistol;
-                            break;
-                        case GunType.AutomaticSh:
-                            type = GunType.Shotgun;
-                            break;
-                    }
-                    break;
-                case false:
-                    curr.timeBetweenShooting = 0.1f;
-                    switch (type)
-                    {
-                        case GunType.Pistol:
-                            type = GunType.AutomaticP;
-                            break;
-                        case GunType.Shotgun:
-                            type = GunType.AutomaticSh;
-                            break;
-                    }
-                    break;
-            }
-            curr.toggle = !curr.toggle;
+
+            curr = guns[2];
+            type = curr.type;
+
         }
     }
 
