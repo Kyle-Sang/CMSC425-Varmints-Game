@@ -5,27 +5,27 @@ using TMPro;
 
 public class PlayerHealth : MonoBehaviour, IDamageable
 {
-    public static bool dead = false;
     public int health = 100;
-    public GameObject gameOverMenu;
+    public int regen = 1;
     public TextMeshProUGUI text;
+    void Start() {
+        text.SetText(health.ToString());
+        InvokeRepeating("Regen", 1, 1);
+    }
 
+    private void Regen() {
+        if (health < 100) {
+            health += regen;
+            text.SetText(health.ToString());
+        }
+    }
     public void Damage(int damage, Vector3 force)
     {
         health -= damage;
         text.SetText(health.ToString());
         if (health <= 0)
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            gameOverMenu.SetActive(true);
-            Time.timeScale = 0f;
-            dead = true;
+            text.SetText("DEAD");
         }
-    }
-
-    private void Update()
-    {
-        text.SetText(health.ToString());
     }
 }
