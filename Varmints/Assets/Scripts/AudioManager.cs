@@ -11,6 +11,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] playerHit;
     public AudioClip[] wallHit;
     public AudioClip[] pillarSpawn;
+    public AudioClip[] flarePop;
     public Sound[] gunSound;
     public AudioClip dryFire;
     public AudioClip torchSpawn;
@@ -41,6 +42,12 @@ public class AudioManager : MonoBehaviour
             int i = rand.Next(playerHit.Length);
             source.PlayOneShot(playerHit[i], volume);
         }
+    }
+
+    public void popFlare()
+    {
+        int i = rand.Next(flarePop.Length);
+        source.PlayOneShot(flarePop[i], volume);
     }
 
     public void fire(GunType type, float betweenShots)

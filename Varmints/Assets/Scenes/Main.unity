@@ -171,6 +171,10 @@ MonoBehaviour:
   pillarSpawn:
   - {fileID: 8300000, guid: ff4fe1f2c442a17489a3120b9b56cc19, type: 3}
   - {fileID: 8300000, guid: f69263364615464448aa124acd503aaa, type: 3}
+  flarePop:
+  - {fileID: 8300000, guid: 89f726e56f6d9e64496306f91091f0ea, type: 3}
+  - {fileID: 8300000, guid: 3239eac4a04373c47b529a5c37ca0d6c, type: 3}
+  - {fileID: 8300000, guid: 8c28166efc4e6a249ac2b0f1b00d5725, type: 3}
   gunSound:
   - type: 0
     Fire: {fileID: 8300000, guid: ed0ed49908791ee4dbb1fc55eb2a7868, type: 3}
