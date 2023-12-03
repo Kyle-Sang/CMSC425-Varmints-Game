@@ -8,8 +8,6 @@ TagManager:
   - CurrencyManager
   - Pillar
   - Wall
-  - Ground
-  - Light
   layers:
   - Default
   - TransparentFX
@@ -21,7 +19,7 @@ TagManager:
   - Player
   - Enemy
   - Post_Processing
-  - Building
+  - 
   - 
   - 
   - 

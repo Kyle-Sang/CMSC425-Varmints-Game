@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-public class SpawnUpgrade : MonoBehaviour
+public class SpawnPillar : MonoBehaviour
 {
     public GameObject wall;
     public float range;
@@ -11,8 +11,6 @@ public class SpawnUpgrade : MonoBehaviour
     public RaycastHit rayHit;
     public PlayerCurrency playerCurrency;
     public int cost;
-
-    public KeyCode key;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,10 +25,11 @@ public class SpawnUpgrade : MonoBehaviour
 
     private void MyInput()
     {
-        if (Input.GetKeyDown(key)) 
+        if (Input.GetKeyDown(KeyCode.E)) 
         {
             if (playerCurrency.count >= cost) {
                 Spawn();
+                playerCurrency.changeMoney(-cost);
             }
         }
     }
@@ -40,10 +39,7 @@ public class SpawnUpgrade : MonoBehaviour
 
         if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range))
         {
-            if (rayHit.transform.CompareTag("Ground")) {
-                Instantiate(wall, rayHit.point, Quaternion.Euler(0, 180, 0));
-                playerCurrency.changeMoney(-cost);
-            }  
+            Instantiate(wall, rayHit.point, Quaternion.Euler(0, 180, 0));
         }
 
     }

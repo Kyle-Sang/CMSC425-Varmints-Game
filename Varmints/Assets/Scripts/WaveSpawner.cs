@@ -1,142 +1,45 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.EditorTools;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class WaveSpawner : MonoBehaviour
 {
+    public GameObject enemyPrefab;
     public List<GameObject> enemies; // references to enemy Game Objects in current wave
-    public List<GameObject> enemyTypes; // List of prefabs that can be spawned
+    public Vector3 spawnLocation;
+    public int enemiesToSpawn;
 
-    public int enemiesToSpawn = 10;
-    public int maxRounds = 10;
-    public float innerRadius = 20;
-    public float outerRadius = 30;
-    public float roundTime; // should we terminate a round after t
-    public float buyTime;
-    public TextMeshProUGUI text;
-    public TextMeshProUGUI wave;
-    
-
-    private float timeLeft; // time left in current phase
-    private int roundNumber = 0;
-    public int roundValue = 5;
-
-    private System.Random rand;
-
-
-
+  
     // Start is called before the first frame update
     void Start()
-    { 
-        StartCoroutine(StartBuyPhase());
-        rand = new System.Random();
-        text.SetText(timeLeft.ToString());
+    {
+        enemies = new List<GameObject>();
+        spawnLocation = Vector3.zero;
     }
 
     // Update is called once per frame
     void Update()
     {
-        timeLeft -= Time.deltaTime;
-        text.SetText(timeLeft.ToString());
-    }
-
-    IEnumerator StartRoundPhase()
-    {
-        Debug.Log("Round Starting");
-        timeLeft = roundTime;
-        yield return new WaitWhile(() => timeLeft > 0 && enemies.Count > 0);
-
-        // Uncomment for if we want it to be limited in rounds
-        //if (roundNumber <= maxRounds)
-        //{
-            StartCoroutine(StartBuyPhase());
-        //}
-        //else
-        //{
-        //    // End Screen Logic
-        //}
-    }
-
-    IEnumerator StartBuyPhase()
-    {
-        Debug.Log("Buy Phase Starting");
-        timeLeft = buyTime;
-        yield return new WaitWhile(() => timeLeft > 0 && !Input.GetKey(KeyCode.C));
-        SpawnWave();
-        StartCoroutine(StartRoundPhase());
+        // Debug.Log("Enemies Count " + enemies.Count);
+        if (enemies.Count <= 0) 
+        {
+            // advance to next wave
+            SpawnWave();
+        }
+        else
+        {
+            // wave is still happening
+        }
     }
 
     void SpawnWave()
     {
-        roundNumber += 1;
-        wave.SetText(roundNumber.ToString());
-        Debug.Log("Wave Spawning");
-        int totalCost = roundNumber * roundValue;
-
-        for (int i = 0; i < totalCost / 2; i++)
+        // Assume enemies is empty 
+        for (int i = 0; i < enemiesToSpawn; i++)
         {
-            // Make half of the enemies small
-            SpawnEnemy(0, GetSpawn());
+            GameObject newEnemy = Instantiate(enemyPrefab, spawnLocation, Quaternion.identity);
+            newEnemy.GetComponent<Chase>().target = GameObject.Find("Player").transform;
+            enemies.Add(newEnemy);
         }
-
-        totalCost /= 2;
-        // Loop for the remaining half spawn randomly
-        while (totalCost > 0)
-        {
-
-            // generate an index into the enemyTypes array
-            int enemyIndex = rand.Next(0, enemyTypes.Count);
-            int enemyCost = enemyTypes[enemyIndex].GetComponent<EnemyHealth>().cost;
-
-            // If the cost of the generated enemy is too steep, go to the next largest enemy and check cost
-            while (enemyIndex > 0 && enemyCost > totalCost)
-            {
-                enemyIndex -= 1;
-                enemyCost = enemyTypes[enemyIndex].GetComponent<EnemyHealth>().cost;
-            }
-            totalCost -= enemyCost;
-            // Note: at the end of this loop totalCost should always equal zero since the cost of the basic 
-            // enemy is 1
-
-
-            SpawnEnemy(enemyIndex, GetSpawn());
-        }
-
-        var checkCost = 0;
-        foreach (GameObject enemy in enemies)
-        {
-            checkCost += enemy.GetComponent<EnemyHealth>().cost;
-        }
-        Debug.Log("Wave Cost: " + checkCost);
-
-        timeLeft = roundTime;
-    }
-
-    void SpawnEnemy(int index, Vector3 spawn)
-    {
-        GameObject newEnemy = Instantiate(enemyTypes[index], spawn, Quaternion.identity);
-        newEnemy.GetComponent<Chase>().target = GameObject.Find("Player").transform;
-        enemies.Add(newEnemy);
-    }
-
-    private Vector3 GetSpawn()
-    {
-        // choose spawn Location
-        float radius = (float)rand.NextDouble() * (outerRadius - innerRadius) + innerRadius;
-        float rotation = rand.Next(0, 360); // represents degrees
-
-        Vector3 spawn = new Vector3(radius, 0, 0);
-        Quaternion q_rotation = Quaternion.Euler(0, rotation, 0);
-
-        spawn = q_rotation * spawn;
-
-        return spawn;
     }
 }
