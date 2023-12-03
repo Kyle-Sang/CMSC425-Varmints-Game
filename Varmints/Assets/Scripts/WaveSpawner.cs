@@ -61,7 +61,7 @@ public class WaveSpawner : MonoBehaviour
     {
         Debug.Log("Buy Phase Starting");
         timeLeft = buyTime;
-        yield return new WaitWhile(() => timeLeft > 0 && !Input.GetKey(KeyCode.C));
+        yield return new WaitWhile(() => timeLeft > 0 && !Input.GetKey(KeyCode.H));
         SpawnWave();
         StartCoroutine(StartRoundPhase());
     }
