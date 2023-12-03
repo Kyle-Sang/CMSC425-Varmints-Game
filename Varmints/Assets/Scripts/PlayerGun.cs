@@ -131,11 +131,12 @@ public class PlayerGun : MonoBehaviour
     {
         manager.reload(type);
         reloading = true;
-        Invoke("ReloadFinished", curr.reloadTime);
+        StartCoroutine(ReloadFinished(curr));
     }
-    private void ReloadFinished()
+    private IEnumerator ReloadFinished(GunData reloadGun)
     {
-        curr.bulletsLeft = curr.magazineSize;
+        yield return new WaitForSeconds(reloadGun.reloadTime);
+        reloadGun.bulletsLeft = reloadGun.magazineSize;
         reloading = false;
     }
 
@@ -144,19 +145,23 @@ public class PlayerGun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             //GunData pistol = Array.Find(guns, x => x.type == GunType.Pistol);
+            Reload();
+            reloading = false;
             curr = guns[0];
             type = curr.type;
 
         } else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             //GunData shotgun = Array.Find(guns, x => x.type == GunType.Shotgun);
-            
+            Reload();
+            reloading = false;
             curr = guns[1];
             type = curr.type;
             
         } else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-
+            Reload();
+            reloading = false;
             curr = guns[2];
             type = curr.type;
 
