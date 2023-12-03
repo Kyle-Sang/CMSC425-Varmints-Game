@@ -14,10 +14,13 @@ public class TurretGun : MonoBehaviour
     public TrailRenderer bulletTrail;
 
     public GameObject muzzleFlash, bulletHoleGraphic;
+
+    private AudioManager manager;
     // Start is called before the first frame update
     void Start()
     {
         layerMask = 1 << layerNumber;
+        manager = FindObjectOfType<AudioManager>();
         InvokeRepeating("Shoot", timeBetweenShots, timeBetweenShots);
     }
 
@@ -33,6 +36,7 @@ public class TurretGun : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out rayHit, range))
         {
             if (rayHit.collider.tag == "Enemy") {
+                manager.fire(GunType.Turret, timeBetweenShots);
                 Vector3 forward = transform.TransformDirection(Vector3.forward) * 100;
                 Debug.DrawRay(transform.position, forward, Color.red);
 

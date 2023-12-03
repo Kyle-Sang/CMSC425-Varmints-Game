@@ -17,8 +17,10 @@ public class ThrowObject : MonoBehaviour
 
     bool readyToThrow;
 
+    private AudioManager manager;
     private void Start()
     {
+        manager = manager = FindObjectOfType<AudioManager>();
         readyToThrow = true;
     }
 
@@ -26,6 +28,7 @@ public class ThrowObject : MonoBehaviour
     {
         if(Input.GetKeyDown(throwKey) && readyToThrow)
         {
+            manager.popFlare();
             Throw();
         }
     }
