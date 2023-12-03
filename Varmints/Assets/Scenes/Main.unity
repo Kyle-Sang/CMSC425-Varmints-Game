@@ -261,12 +261,9 @@ MonoBehaviour:
     Fire: {fileID: 8300000, guid: def11714722a69c48887583d34766e6f, type: 3}
     Reload: {fileID: 8300000, guid: a79ea0d195c3bce45b772489d0e76efd, type: 3}
   - type: 3
-    Fire: {fileID: 8300000, guid: ed0ed49908791ee4dbb1fc55eb2a7868, type: 3}
-    Reload: {fileID: 8300000, guid: 71ee5310578ecdb42aca29339c980882, type: 3}
+    Fire: {fileID: 8300000, guid: 84a14f39f7a17c646baf5f0bc1dae90d, type: 3}
+    Reload: {fileID: 8300000, guid: 081a5a73a433a7f4d998703c1d09cf6a, type: 3}
   - type: 4
-    Fire: {fileID: 8300000, guid: 75b10c905ad468049bc4dff3c6476ebe, type: 3}
-    Reload: {fileID: 8300000, guid: a79ea0d195c3bce45b772489d0e76efd, type: 3}
-  - type: 5
     Fire: {fileID: 8300000, guid: 413076a97aaef214287b9744cc58aee0, type: 3}
     Reload: {fileID: 8300000, guid: 75eb5e101094a5f4da8d3efccf70b258, type: 3}
   dryFire: {fileID: 8300000, guid: 8921752bf22c11046bfb0d4376c3cb2e, type: 3}
@@ -3426,6 +3423,19 @@ MonoBehaviour:
     bulletsPerTap: 1
     allowButtonHold: 0
     bulletsLeft: 10
+    bulletsShot: 0
+    toggle: 0
+  - type: 3
+    damage: 40
+    timeBetweenShooting: 0.1
+    spread: 0.03
+    range: 70
+    reloadTime: 1
+    timeBetweenShots: 1
+    magazineSize: 40
+    bulletsPerTap: 1
+    allowButtonHold: 1
+    bulletsLeft: 40
     bulletsShot: 0
     toggle: 0
   type: 0
