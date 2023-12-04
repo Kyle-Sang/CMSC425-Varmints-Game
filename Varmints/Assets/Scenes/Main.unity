@@ -1066,6 +1066,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   regen: 1
+  regen: 1
   text: {fileID: 704513363}
   gameOverMenu: {fileID: 392642111}
 --- !u!136 &480281546
