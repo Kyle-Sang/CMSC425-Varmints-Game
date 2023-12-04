@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  moveSpeed: 0.2
+  moveSpeed: 0.8
 --- !u!114 &7615601920886219218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308487de201cca240a0c7549edc4a1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 400
+  health: 500
   value: 100
   cost: 5
   playerCurrency: {fileID: 0}
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSpeed: 1
-  damage: 5
+  damage: 20
 --- !u!82 &6273295272356838385
 AudioSource:
   m_ObjectHideFlags: 0

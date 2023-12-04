@@ -11,7 +11,7 @@ public class EnemyAttack : MonoBehaviour
     void OnTriggerStay(Collider other) {
         if (other.gameObject.tag != "Enemy" && other.TryGetComponent(out IDamageable damageable) && Time.time > delay) {
                 damageable.Damage(damage, new Vector3(0, 0, 0));
-                delay += attackSpeed;
+                delay = Time.time + attackSpeed;
             }
     }
 }
