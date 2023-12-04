@@ -1066,7 +1066,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   regen: 1
-  regen: 1
   text: {fileID: 704513363}
   gameOverMenu: {fileID: 392642111}
 --- !u!136 &480281546
@@ -1847,11 +1846,10 @@ MonoBehaviour:
   - {fileID: 8305963969691333191, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
   - {fileID: 4463562231052782417, guid: 562a57e5d0334fe4983c45705eb1b2b9, type: 3}
   - {fileID: 6204649638501254713, guid: 9409aa8f6593c9747bef9dcc4a395d68, type: 3}
-  enemiesToSpawn: 10
   maxRounds: 10
   innerRadius: 20
   outerRadius: 30
-  roundTime: 10
+  roundTime: 60
   buyTime: 10
   text: {fileID: 678011408}
   wave: {fileID: 1025490223}
