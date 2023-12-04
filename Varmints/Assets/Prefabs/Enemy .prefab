@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSpeed: 1
-  damage: 1
+  damage: 20
 --- !u!82 &438826425865311939
 AudioSource:
   m_ObjectHideFlags: 0

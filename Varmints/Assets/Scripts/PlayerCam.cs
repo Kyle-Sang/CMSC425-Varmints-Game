@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerCam : MonoBehaviour
 {
+    // https://www.youtube.com/watch?v=f473C43s8nE
     public float sensX;
     public float sensY;
 

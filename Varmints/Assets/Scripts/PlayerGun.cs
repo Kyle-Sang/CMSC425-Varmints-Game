@@ -9,6 +9,7 @@ using System.Data.SqlTypes;
 
 public class PlayerGun : MonoBehaviour
 {
+    //https://www.youtube.com/watch?v=bqNW08Tac0Y
     //Gun stats
     public int damage;
     public float timeBetweenShooting, spread, range, reloadTime, timeBetweenShots;
@@ -27,8 +28,6 @@ public class PlayerGun : MonoBehaviour
 
     //Graphics
     public GameObject muzzleFlash, bulletHoleGraphic;
-    // public CamShake camShake;
-    public float camShakeMagnitude, camShakeDuration;
     public TextMeshProUGUI text;
 
     private AudioSource objAudio;
@@ -107,9 +106,6 @@ public class PlayerGun : MonoBehaviour
                 damageable.Damage(curr.damage, ((rayHit.collider.transform.position - transform.position) * force));
             }
         }
-
-        //ShakeCamera
-        // camShake.Shake(camShakeDuration, camShakeMagnitude);
 
         //Graphics
         GameObject flash = Instantiate(muzzleFlash, attackPoint.position, Quaternion.Euler(attackPoint.transform.eulerAngles));

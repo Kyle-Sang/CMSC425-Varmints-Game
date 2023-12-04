@@ -118,8 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd81206edd9c54841b6ffe60fe8c536f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 150
   cooldown: 5
-  regenRate: 5
+  regenRate: 20
   mesh: {fileID: 5110858551876230826}
   box: {fileID: 7398162226199238472}

@@ -5,6 +5,7 @@ using TMPro;
 
 public class ThrowObject : MonoBehaviour
 {
+    // https://www.youtube.com/watch?v=F20Sr5FlUlE
     public Transform cam;
     public Transform attackPoint;
     public GameObject objectToThrow;
