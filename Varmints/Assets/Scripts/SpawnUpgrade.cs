@@ -39,7 +39,6 @@ public class SpawnUpgrade : MonoBehaviour
     }
     private void Spawn()
     {
-        cost += increment;
         Vector3 direction = fpsCam.transform.forward;
 
         if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range))
@@ -48,6 +47,7 @@ public class SpawnUpgrade : MonoBehaviour
                 manager.spawn(wall.name);
                 Instantiate(wall, rayHit.point, Quaternion.Euler(0, 180, 0));
                 playerCurrency.changeMoney(-cost);
+                cost += increment;
             }  
         }
 

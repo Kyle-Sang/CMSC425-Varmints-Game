@@ -36,6 +36,7 @@ public class WaveSpawner : MonoBehaviour
     void Start()
     { 
         StartCoroutine(StartBuyPhase());
+        timeLeft = 30.0f;
         rand = new System.Random();
         text.SetText(timeLeft.ToString());
     }
@@ -68,7 +69,7 @@ public class WaveSpawner : MonoBehaviour
     {
         Debug.Log("Buy Phase Starting");
         timeLeft = buyTime;
-        yield return new WaitWhile(() => timeLeft > 0 && !Input.GetKey(KeyCode.C));
+        yield return new WaitWhile(() => timeLeft > 0 && !Input.GetKey(KeyCode.T));
         SpawnWave();
         StartCoroutine(StartRoundPhase());
     }
@@ -76,7 +77,7 @@ public class WaveSpawner : MonoBehaviour
     void SpawnWave()
     {
         roundNumber += 1;
-        wave.SetText(roundNumber.ToString());
+        wave.SetText("Round: " + roundNumber.ToString());
         Debug.Log("Wave Spawning");
         int totalCost = roundNumber * roundValue;
 

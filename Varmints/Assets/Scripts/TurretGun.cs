@@ -24,19 +24,13 @@ public class TurretGun : MonoBehaviour
         InvokeRepeating("Shoot", timeBetweenShots, timeBetweenShots);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void Shoot()
     {
         //RayCast
         if (Physics.Raycast(transform.position, transform.forward, out rayHit, range))
         {
             if (rayHit.collider.tag == "Enemy") {
-                manager.fire(GunType.Turret, timeBetweenShots);
+                // manager.fire(GunType.Turret, timeBetweenShots);
                 Vector3 forward = transform.TransformDirection(Vector3.forward) * 100;
                 Debug.DrawRay(transform.position, forward, Color.red);
 
