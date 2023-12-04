@@ -2,19 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.EditorTools;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class WaveSpawner : MonoBehaviour
 {
     public List<GameObject> enemies; // references to enemy Game Objects in current wave
     public List<GameObject> enemyTypes; // List of prefabs that can be spawned
 
-    public int enemiesToSpawn = 10;
     public int maxRounds = 10;
     public float innerRadius = 20;
     public float outerRadius = 30;
@@ -53,16 +48,8 @@ public class WaveSpawner : MonoBehaviour
         Debug.Log("Round Starting");
         timeLeft = roundTime;
         yield return new WaitWhile(() => timeLeft > 0 && enemies.Count > 0);
-
-        // Uncomment for if we want it to be limited in rounds
-        //if (roundNumber <= maxRounds)
-        //{
-            StartCoroutine(StartBuyPhase());
-        //}
-        //else
-        //{
-        //    // End Screen Logic
-        //}
+        DestroyAll();
+        StartCoroutine(StartBuyPhase());
     }
 
     IEnumerator StartBuyPhase()
@@ -139,5 +126,15 @@ public class WaveSpawner : MonoBehaviour
         spawn = q_rotation * spawn;
 
         return spawn;
+    }
+
+    void DestroyAll()
+    {
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+
+        enemies.Clear();
     }
 }

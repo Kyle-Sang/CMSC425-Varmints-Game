@@ -396,16 +396,15 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &247678359
-Transform:
+--- !u!224 &247678359
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247678358}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1129, y: 489, z: 80.00659}
+  m_LocalPosition: {x: 0, y: 0, z: 80.00659}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -415,6 +414,11 @@ Transform:
   - {fileID: 1872092842}
   m_Father: {fileID: 442031153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: -169, y: -51}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &321755512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -716,9 +720,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 442031153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -576, y: 469}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 384, y: -71}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &416689168
@@ -1119,9 +1123,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 442031153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 27, y: 409}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 27, y: -131}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &678011408
@@ -1233,7 +1237,7 @@ GameObject:
   - component: {fileID: 686304603}
   - component: {fileID: 686304602}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1253,9 +1257,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 442031153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 828, y: -442}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -132, y: 98}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &686304602
@@ -1387,9 +1391,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 442031153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -413, y: -423}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 547, y: 117}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &704513363
@@ -1842,11 +1846,10 @@ MonoBehaviour:
   - {fileID: 8305963969691333191, guid: b6c0a3b06adfc5444affcc3823153d59, type: 3}
   - {fileID: 4463562231052782417, guid: 562a57e5d0334fe4983c45705eb1b2b9, type: 3}
   - {fileID: 6204649638501254713, guid: 9409aa8f6593c9747bef9dcc4a395d68, type: 3}
-  enemiesToSpawn: 10
   maxRounds: 10
   innerRadius: 20
   outerRadius: 30
-  roundTime: 6000
+  roundTime: 60
   buyTime: 10
   text: {fileID: 678011408}
   wave: {fileID: 1025490223}
@@ -2201,8 +2204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eaf1281cf5a166449446199a09f4d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 2000
-  sensY: 2000
+  sensX: 500
+  sensY: 500
   orientation: {fileID: 947533344}
 --- !u!114 &963194230
 MonoBehaviour:
@@ -2313,9 +2316,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 442031153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 477}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -63}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1025490223
@@ -4063,8 +4066,6 @@ MonoBehaviour:
     m_Bits: 256
   muzzleFlash: {fileID: 6279108870713274002, guid: 310438eed4587fb4f96f6d965f621037, type: 3}
   bulletHoleGraphic: {fileID: 6279108870713274002, guid: 7dfdc08f1754663429199632cea6e5f0, type: 3}
-  camShakeMagnitude: 0
-  camShakeDuration: 0
   text: {fileID: 686304602}
   guns:
   - type: 0
@@ -4522,10 +4523,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 442031153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -573, y: -447}
-  m_SizeDelta: {x: 102.4, y: 102.4}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 387, y: 93}
+  m_SizeDelta: {x: 102.400024, y: 102.399994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1574424035
 MonoBehaviour:
