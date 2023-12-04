@@ -679,6 +679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  regen: 1
   text: {fileID: 704513363}
 --- !u!136 &480281546
 CapsuleCollider:
@@ -1253,9 +1254,11 @@ MonoBehaviour:
   maxRounds: 2
   innerRadius: 20
   outerRadius: 30
-  roundTime: 6000
+  roundTime: 10
   buyTime: 10
   text: {fileID: 678011408}
+  wave: {fileID: 0}
+  roundValue: 5
 --- !u!1 &947533343
 GameObject:
   m_ObjectHideFlags: 0
