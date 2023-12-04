@@ -189,8 +189,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.7640476
-  m_Center: {x: 0, y: 0, z: -0.36404762}
+  m_Radius: 0.5878418
+  m_Center: {x: 0, y: 0.0074688913, z: 0.0025535584}
 --- !u!135 &334098369263684582
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSpeed: 5
-  damage: 50
+  damage: 150
 --- !u!82 &3041739630768758863
 AudioSource:
   m_ObjectHideFlags: 0

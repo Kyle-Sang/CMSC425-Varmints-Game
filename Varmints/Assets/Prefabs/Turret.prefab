@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e475af7dbd1d1b43a9399c313dbab53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
+  damage: 50
   range: 100
   timeBetweenShots: 1
   attackPoint: {fileID: 4574080227917983522}
