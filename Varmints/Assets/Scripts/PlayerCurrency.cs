@@ -9,11 +9,11 @@ public class PlayerCurrency : MonoBehaviour
     public TextMeshProUGUI text;
 
     void Start() {
-        text.SetText(count.ToString());
+        text.SetText("$" + count.ToString());
     }
 
     public void changeMoney(int change) {
         count += change;
-        text.SetText(count.ToString());
+        text.SetText("$" + count.ToString());
     }
 }

@@ -6,27 +6,32 @@ public class WallHealth : MonoBehaviour, IDamageable
 {
     public int health = 100;
     public float cooldown = 5.0f;
+    public int regenRate = 5;
     public MeshRenderer mesh;
     public BoxCollider box;
+
+    void Start() {
+        InvokeRepeating("Revive", cooldown, cooldown);
+    }
 
     public void Damage(int damage, Vector3 force)
     {
         health -= damage;
         if (health <= 0)
         {
-            StartCoroutine(Death());
+            Death();
         }
     }
-    IEnumerator Death() {
+    public void Death() {
         mesh.enabled = false;
         box.enabled = false;
-        yield return new WaitForSecondsRealtime(cooldown);
-        Revive();
     }
 
     public void Revive() {
         mesh.enabled = true;
         box.enabled = true;
-        health = 100;
+        if (health < 100) {
+            health += regenRate;
+        }
     }
 }

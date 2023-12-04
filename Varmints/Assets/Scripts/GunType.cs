@@ -6,5 +6,7 @@ public enum GunType
 {
     Pistol,
     Shotgun,
-    None
+    None, 
+    Automatic,
+    Turret
 }

@@ -11,12 +11,15 @@ public class SpawnUpgrade : MonoBehaviour
     public RaycastHit rayHit;
     public PlayerCurrency playerCurrency;
     public int cost;
+    public int increment = 0;
 
     public KeyCode key;
+
+    private AudioManager manager;
     // Start is called before the first frame update
     void Start()
     {
-
+        manager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -41,8 +44,10 @@ public class SpawnUpgrade : MonoBehaviour
         if (Physics.Raycast(fpsCam.transform.position, direction, out rayHit, range))
         {
             if (rayHit.transform.CompareTag("Ground")) {
+                manager.spawn(wall.name);
                 Instantiate(wall, rayHit.point, Quaternion.Euler(0, 180, 0));
                 playerCurrency.changeMoney(-cost);
+                cost += increment;
             }  
         }
 
