@@ -13,4 +13,8 @@ public class GunData
     public bool allowButtonHold;
     public int bulletsLeft, bulletsShot;
     public bool toggle = false;
+    public GameObject model;
+    public string reloadAnim;
+    public string fireAnim;
+
 }

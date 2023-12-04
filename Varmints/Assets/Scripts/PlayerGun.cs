@@ -39,6 +39,7 @@ public class PlayerGun : MonoBehaviour
     //private Boolean toggle;
     private float timeBetweenShoot;
     public TrailRenderer bulletTrail;
+    GameObject currGunModel;
 
 
     private void Awake()
@@ -49,6 +50,8 @@ public class PlayerGun : MonoBehaviour
         manager = FindObjectOfType<AudioManager>();
         curr = guns[0];
         type = guns[0].type;
+        currGunModel = guns[0].model;
+        currGunModel.SetActive(true);
         curr.bulletsLeft = curr.magazineSize;
         timeBetweenShoot = curr.timeBetweenShooting; 
 
@@ -73,6 +76,7 @@ public class PlayerGun : MonoBehaviour
         {
             curr.bulletsShot = curr.bulletsPerTap;
             manager.fire(type, curr.timeBetweenShooting);
+            curr.model.GetComponent<Animator>().Play(curr.fireAnim);
             Shoot();
         }
         if (readyToShoot && shooting && !reloading && curr.bulletsLeft <= 0)
@@ -125,6 +129,7 @@ public class PlayerGun : MonoBehaviour
     }
     private void Reload()
     {
+        curr.model.GetComponent<Animator>().Play(curr.reloadAnim);
         manager.reload(type);
         reloading = true;
         StartCoroutine(ReloadFinished(curr));
@@ -140,25 +145,32 @@ public class PlayerGun : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            curr.model.SetActive(false);
             //GunData pistol = Array.Find(guns, x => x.type == GunType.Pistol);
             Reload();
             reloading = false;
             curr = guns[0];
+            curr.model.SetActive(true);
             type = curr.type;
 
         } else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+
             //GunData shotgun = Array.Find(guns, x => x.type == GunType.Shotgun);
+            curr.model.SetActive(false);
             Reload();
             reloading = false;
             curr = guns[1];
+            curr.model.SetActive(true);
             type = curr.type;
             
         } else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            curr.model.SetActive(false);
             Reload();
             reloading = false;
             curr = guns[2];
+            curr.model.SetActive(true);
             type = curr.type;
 
         }
